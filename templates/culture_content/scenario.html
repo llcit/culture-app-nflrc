@@ -1,0 +1,222 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% load static  %}
+{% block content %}
+    <div class="section scrollspy">
+    <div class="container">
+       <img src='/static/culture/media/{{ module.image_for_topics }}' class="responsive-img">
+        <p>
+            <a href="{% url 'home' %}mod/{{ module.language }}/">{{ module.name }}</a><strong> > </strong><a href="{% url 'home' %}top/{{ topic.id }}">{{ topic.name }}</a>
+        </p>
+        <h1>{{ scenario.name }}</h1>
+        <a class="waves-effect blue btn" id="desbutton">Situation</a>
+        <a class="waves-effect blue btn" id="hidebutton">Hide situation</a>
+        <div class="spaces">
+            <br>
+            <br>
+        </div>
+    <div  id="description">
+                <div class="row valign-wrapper">
+                    <div class="col s12">
+                        {% if not scenario.context_after_feedback|yesno:"no" or scenario.context_before_and_after_feedback|yesno:"yes" %}
+                                <div style="position: relative; margin: 0 auto; font-size: 80%; background-color: rgba(255,255,204,1); padding: 2rem; max-width: 80%; box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23); transform: rotate(-1deg);">
+                                        <h3>Context</h3>
+                                        {{ scenario.initial_information|safe  }}
+                                </div>
+
+                        {% endif %}
+                        <BR>
+                        <div id="situation">
+                            <span class="black-text">{{ scenario.description|safe }}</span>
+                        </div>
+                        <BR>
+
+                        {% if scenario.culture_note and not scenario.culture_note_after_feedback or scenario.culture_note_before_and_after_feedback|yesno:"yes"  %}
+                                <div style="background-color:rgba(223,234, 241,1); margin: 2%; padding: 2%; border-radius: 10px; box-shadow: 0 1px 10px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 0, 0, 0.1);">
+                                <div style="padding: 3%; border: 3px dashed rgba(192,214,228,1); border-radius: 10px; margin: 0 auto;">
+                                    <h3>Culture Note</h3>
+                                        {{ scenario.culture_note|safe  }}
+                                </div>
+                                </div>
+
+                        {% endif %}
+                        {% if scenario.language_note and not scenario.language_note_after_feedback  or scenario.language_note_before_and_after_feedback|yesno:"yes"  %}
+
+                                    <h3>Language Note</h3>
+                                <p>{{ scenario.language_note|safe  }}</p>
+
+                        {% endif %}
+                    </div>
+                </div>
+    </div>
+     <div id="judgment">
+
+
+                    <div class="col s12">
+                        <p class="instructions">{{ scenario.judgment_task.description|safe }}</p>
+                         <div class="col s12">
+                            <ul>
+                                {% for an in scenario.judgment_task.get_answers %}
+                                    <li class="collection-item">
+                                          <p>{{ an.content|safe }}</p>
+                                        <p class="range-field" data-id="{{ an.pk }}">
+                                         <input type="range"  min="0" max="5" step="0.1"/>
+                                        </p>
+                                        <br>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                         </div>
+                    </div>
+
+     <a class="blue btn" id="send">Submit</a>
+     <div class="spaces">
+        <br>
+        <br>
+     </div>
+    </div>
+    <a class="waves-effect blue btn" id="judgbutton">Task</a>
+    <div class="spaces">
+    </br>
+    </br>
+    </div>
+    <div id="feedback">
+        <p class="instructions">{{ scenario.description|safe }}</p>
+        <h3>Feedback</h3>
+                    <div id="results">
+
+                    </div>
+        <a class="blue btn" id="next">Next</a>
+    </div>
+    <div  id="feedback2">
+
+
+                        {% if scenario.context_after_feedback|yesno:"yes" or scenario.context_before_and_after_feedback|yesno:"yes"  %}
+
+                             <h3>Context</h3>
+                                <p>{{ scenario.initial_information|safe  }}</p>
+
+                        {% endif %}
+                        {% if scenario.culture_note_after_feedback|yesno:"yes" or scenario.culture_note_before_and_after_feedback|yesno:"yes" %}
+                            <div style="background-color:rgba(223,234, 241,1); margin: 2%; padding: 2%; border-radius: 10px; box-shadow: 0 1px 10px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 0, 0, 0.1);">
+                                <div style="padding: 3%; border: 3px dashed rgba(192,214,228,1); border-radius: 10px; margin: 0 auto;">
+                                    <h3>Culture Note</h3>
+                                <p>{{ scenario.culture_note|safe  }}</p>
+                                </div>
+                            </div>
+
+                        {% endif %}
+                        {% if scenario.language_note_after_feedback|yesno:"yes"  or scenario.language_note_before_and_after_feedback|yesno:"yes"  %}
+
+                                    <h3>Language Note</h3>
+                                <p>{{ scenario.language_note|safe  }}</p>
+
+                        {% endif %}
+                         {% if scenario.reflection_task  %}
+
+                                    <h3>Reflection task for "{{ scenario.name }}"</h3>
+                                <p>{{ scenario.reflection_task|safe  }}</p>
+
+                        {% endif %}
+                        {% if scenario.extension_task  %}
+
+                                    <h3>Extension task for "{{ scenario.name }}"</h3>
+                                <p>{{ scenario.extension_task|safe  }}</p>
+
+                        {% endif %}
+
+                            <a id="next" href="{% url 'home' %}top/{{ topic.id }}">Other situations in topic "{{ topic.name }}"</a>
+
+                </div>
+    </div>
+    <div id="preloader">
+        <div class="row valign-wrapper">
+            <div class="col s12">
+                    <div class="progress">
+                        <div class="indeterminate"></div>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    </div>
+{% endblock %}
+{% block js %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('p').filter(function () { return $.trim(this.innerHTML) == "" }).remove();
+	        $('#back').click(function(){
+		        parent.history.back();
+		        return false;
+	        });
+        $("#preloader").hide();
+        $("#desbutton").hide();
+        $("#hidebutton").hide();
+        $("#judgment").hide();
+        $("#feedback").hide();
+        $("#feedback2").hide();
+        $("#feedback3").hide();
+        $("#desbutton").click(function(){
+
+            $("#description").show();
+            $("#desbutton").hide();
+            $("#hidebutton").show();
+            $("#judgbutton").hide();
+
+        });
+        $("#judgbutton").click(function(){
+            $("#judgment").show();
+            $("#description").hide();
+            $("#judgbutton").hide();
+            $("#desbutton").show();
+
+        });
+        $("#hidebutton").click(function(){
+            $("#description").hide();
+            $("#desbutton").show();
+            $("#hidebutton").hide();
+        });
+        $("#send").click(function(){
+            $("#judgment").hide();
+            $("#description").hide();
+            $('.spaces').find('br').remove()
+            $('.spaces').remove();
+            $("#hidebutton").remove();
+            $("#desbutton").remove();
+            $("#judgbutton").remove();
+            var promises = [];
+            var ids=[];
+            $( ".range-field" ).each(function() {
+                        var id = $( this ).attr("data-id");
+                        var response = $( this ).find('span').text();
+                        if (response=='11'){response=1.0}else if(response=='00'){response=0.0}else if(response=='22'){response=2.0}else if(response=='33'){response=3.0}else if(response=='44'){response=4.0}else if(response=='55'){response=5.0};
+                        var eval = parseFloat(response).toFixed(1);
+                        if (isNaN(eval)){
+                            eval = 2.5;
+                        };
+                var chain = $.Deferred();
+                chain.resolve(promise=saveResponse(id, eval));
+                promises.push(promise);
+
+                promise.then(function (data) {
+                    //var jsonObject=[data.answer_id, [data.from, data.to], data.response_id, eval, data.content, data.feedback];
+                        //promises.push([data.answer_id, [data.from, data.to], data.response_id, eval, data.content, data.feedback]);
+                    create_slider([data.answer_id, [data.from, data.to], data.response_id, eval, data.content, data.feedback]);
+
+                });
+
+                });
+            console.log(promises.length);
+            $("#preloader").show().delay(1000).fadeOut(500);
+            $("#feedback").fadeIn(1500);
+
+        });
+        $("#next").click(function(){
+            $("#feedback").hide();
+            $("#description").hide();
+            $("#feedback2").show();
+        });
+});
+    </script>
+{% endblock %}

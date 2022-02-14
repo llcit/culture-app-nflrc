@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+<h1>Dashboard</h1>
+<br>
+<ul class="collection">
+{% if profile.language == 'A' %}
+    <li class="collection-item avatar">
+      <i class="material-icons circle green">insert_chart</i>
+      <span class="title"><a href="{% url 'home' %}responses/{{ profile.language }}/">Arabic summaries</a></span>
+    </li>
+    {% elif profile.language == 'C' %}
+        <li class="collection-item avatar">
+            <i class="material-icons circle red">insert_chart</i>
+            <span class="title"><a href="{% url 'home' %}responses/{{ profile.language }}/">Chinese summaries</a></span>
+        </li>
+
+    {% elif profile.language == 'R' %}
+         <li class="collection-item avatar">
+            <i class="material-icons circle blue">insert_chart</i>
+            <span class="title"><a href="{% url 'home' %}responses/{{ profile.language }}/">Russian summaries</a></span>
+         </li>
+{% elif profile.language == 'L' %}
+    <li class="collection-item avatar">
+      <i class="material-icons circle green">insert_chart</i>
+      <span class="title"><a href="{% url 'home' %}responses/A/">Arabic summaries</a></span>
+    </li>
+    <li class="collection-item avatar">
+            <i class="material-icons circle red">insert_chart</i>
+            <span class="title"><a href="{% url 'home' %}responses/C/">Chinese summaries</a></span>
+    </li>
+     <li class="collection-item avatar">
+            <i class="material-icons circle blue">insert_chart</i>
+            <span class="title"><a href="{% url 'home' %}responses/R/">Russian summaries</a></span>
+     </li>
+{% endif %}
+
+</ul>
+</div>
+{% endblock %}

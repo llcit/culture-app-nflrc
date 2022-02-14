@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+<br>
+<h2>Summary for situations in {{ course.name }}</h2>
+<p>The following table presents user results on judgment tasks in situations (scenarios) in Culture TIPS.
+    The table lists situations in your course as rows in a table. The table combines data from all users in that course.</p>
+<p>For each listed situation, you can see the total number of times the judgment task associated with the listed situation was attempted ("Attempts").To the right of this number, you will see a percentage ("% in agreement with experts") that indicates, for the total of all options presented in that situation's judgment task, in what proportion of responses the user's slider fell within the zone or band of expert opinions.
+    If a user's slider fell outside this band, no matter whether close or far away, their response was counted as "not in agreement."</p>
+<p>To see more detail on the user responses elicited in any situation's judgment task, click on "Details"; this will show similar figures with regard to each option in the task.</p>
+
+<table id="results" class="display">
+        <thead>
+          <tr>
+              <th>Scenario</th>
+              <th>Attempts</th>
+              <th>% in agreement with experts</th>
+              <th>Details</th>
+          </tr>
+        </thead>
+<tbody>
+{% for stat in stats %}
+          <tr>
+            <td>{{ stat.0.name }}</td>
+            <td>{{ stat.1.0 }}</td>
+            <td>{{ stat.1.1 }}</td>
+            <td><a href="{% url 'home' %}course_responses/{{ course.id }}/scenario/{{ stat.0.id }}">View</a></td>
+          </tr>
+{% endfor %}
+</tbody>
+      </table>
+    <br>
+
+
+
+</div>
+{% endblock %}
+{% block js %}
+<script>
+$(document).ready( function () {
+    $('#results').DataTable();
+} );
+</script>
+{% endblock %}

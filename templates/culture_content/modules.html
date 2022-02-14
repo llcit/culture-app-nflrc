@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load static %}
+{% block content %}
+    <div class="section scrollspy">
+
+    <div class="container">
+
+ {% if  '/A/' in request.path   %}
+         <img src="{% static '/assets/img/morocco-2349647-optimized.jpg' %}"  class="responsive-img">
+    {% elif '/C/' in request.path %}
+      <a href="{% url 'home' %}mod/Q">
+                    <img src="{% static '/assets/img/quickstart-guide.jpg' %}" class="responsive-img">
+                </a>
+         <img src="{% static '/assets/img/china-347297-optimized.jpg' %}"  class="responsive-img">
+
+    {% elif '/R/' in request.path %}
+         <img src="{% static '/assets/img/almaty-91219-optimized.jpg' %}"  class="responsive-img">
+     {% elif '/E/' in request.path %}
+         <img src="{% static '/assets/img/home_ru_en/05-russian-astana-02-optimized-en.jpg' %}"  class="responsive-img">
+     {% elif '/L/' in request.path %}
+         <img src="{% static '/assets/img/quickstart-guide.jpg' %}"  class="responsive-img">
+    {% elif '/B/' in request.path %}
+         <img src="{% static '/assets/img/home_ar/04-morocco-optimized.jpg' %}"  class="responsive-img">
+     {% elif '/P/' in request.path %}
+         <img src="{% static '/assets/img/home_br_en/02-por-home-optimized.jpg' %}"  class="responsive-img">
+     {% elif '/D/' in request.path %}
+         <img src="{% static '/assets/img/home_br_por/02-por-home-optimized-por.jpg' %}"  class="responsive-img">
+     {% elif '/I/' in request.path %}
+         <img src="{% static '/assets/img/home_wisconsin/Indonesian.jpg' %}"  class="responsive-img">
+    {% elif '/T/' in request.path %}
+         <img src="{% static '/assets/img/home_wisconsin/Turkish.jpg' %}"  class="responsive-img">
+    {% elif '/U/' in request.path %}
+         <img src="{% static '/assets/img/home_wisconsin/Urdu.jpg' %}"  class="responsive-img">
+         {% elif '/H/' in request.path %}
+         <img src="{% static '/assets/img/home_wisconsin/Hindi.jpg' %}"  class="responsive-img">
+    {% endif %}
+
+            {% for obj in modules %}
+
+                    <h1>{{ obj.name }}</h1>
+                    <div id="blurb">
+                        <p>{{ obj.blurb|safe }}</p>
+                    </div>
+                    <a data-downbtn="{{ obj.id}}" class="blue btn">More</a>
+                    <a data-upbtn="{{ obj.id}}" class="blue btn">Less</a>
+                    <div data-hidden="{{ obj.id}}">
+                            <p>{{ obj.introduction|safe }}</p>
+                            {% if obj.objectives %}
+                                <h3 id="show">Learning Objectives</h3>
+                                <p>{{ obj.objectives.objectives| safe }}</p>
+                            {% endif %}
+                            <h3>{{ obj.name }} Topics </h3>
+
+
+                                {% for top in obj.topics.all|dictsort:"order" %}
+                                    <p><strong><a href="{% url 'home' %}top/{{ top.pk }}">{{ top.name }}</a></strong></p>
+                                {% endfor %}
+
+                        </div>
+
+                {% endfor %}
+                    </div>
+            </div>
+
+{% endblock %}
+{% block js %}
+    <script>
+    $(document).ready(function() {
+        $('[data-hidden]*').hide();
+        $('[data-upbtn]*').hide();
+        $('[data-downbtn]').click(function(){
+            var id = $(this).attr('data-downbtn');
+            $(this).hide();
+            $('[data-upbtn='+id+']').show();
+            $('[data-hidden='+id+']').show();
+    });
+        $('[data-upbtn]').click(function(){
+            var id = $(this).attr('data-upbtn');
+            $(this).hide();
+            $('[data-downbtn='+id+']').show();
+            $('[data-hidden='+id+']').hide();
+            });
+        })
+    </script>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+
+<h1>Student Profile Page</h1>
+<hr>
+<br>
+<a href="{% url 'password_change' %}">Need to change password?</a>
+{% if courses %}
+    <h1>Your current courses</h1>
+    <a href="{% url 'home' %}/courses" >Find courses to enroll</a>
+    <ul class="collection">
+    {% for course in courses %}
+        <li class="collection-item">{{ course }}</li>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <h4>You have not enrolled in any course yet.</h4>
+    <p>You can enroll in a course by visiting <a href="{% url 'home' %}/courses" >this page</a></p>
+{% endif %}
+<hr>
+<h1>Track your progress</h1>
+<h3>Scenarios</h3>
+<br>
+<p>The following table presents your results on judgment tasks that fall below the acceptance threshold in situations (scenarios) in Culture TIPS.
+    The table lists situations in your course as rows in a table. </p>
+<p>For each listed situation, you can see the percentage that indicates, for the total of all options presented in that situation's judgment task, in what proportion of responses the user's slider fell within the zone or band of expert opinions.
+    If a user's slider fell outside this band, no matter whether close or far away, their response was counted as "not in agreement."</p>
+<ul class="collection">
+<h3>The following scenarios need your attention!</h3>
+    {% for result in results %}
+{% if result.1.1 < 66 %}
+        <li class="collection-item">
+
+            <h4>{{ result.0.name }} | {{ result.1.1 }} % {% if result.1.1 < 30 %}<i class=" red small material-icons">sentiment_very_dissatisfied</i>
+                {% elif result.1.1 > 29  %}<i class=" yellow small material-icons">sentiment_neutral</i>
+            {% endif %}</h4>
+
+        </li>
+        {% endif %}
+    {%  endfor %}
+</ul>
+</div>
+{% endblock %}

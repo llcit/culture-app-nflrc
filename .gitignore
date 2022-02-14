@@ -1,0 +1,13 @@
+*.pyc
+*.sqlite3
+*.json
+migrations/
+venv/
+media/
+settings.py
+.idea/
+lib/
+lib64*
+bin/
+include/
+pip-selfcheck.json

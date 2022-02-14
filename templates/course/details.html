@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+    {% if message %}
+        <div class="card-panel grey lighten-5 z-depth-1" id="description">
+                <h5>{{ message }}</h5>
+            <p>If you need to reset your password click <a href="{% url 'home' %}/password_reset">here</a></p>
+        <button><a href="{% url 'home' %}/request-user/">Return</a></button>
+</div>
+    {% else %}
+<div class="card-panel grey lighten-5 z-depth-1" id="description">
+                <h5>These are your account credentials:</h5>
+                <div class="row valign-wrapper">
+                    <div class="col s12">
+                        <div class="row">
+	<h4>User: {{ user }}</h4>
+    <h4>Password: {{ passw }}</h4>
+                        </div>
+                        </div>
+                    </div>
+</div>
+    {% endif %}
+{% endblock %}

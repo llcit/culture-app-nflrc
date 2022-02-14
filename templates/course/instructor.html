@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+<br>
+<a href="{% url 'password_change' %}">Need to change password?</a>
+<hr>
+<h1>Instructor's Dashboard</h1>
+<h3>Courses</h3>
+<a href="{% url 'home' %}/create-course">Create a new course</a>
+<br>
+<br>
+<div id="response"></div>
+<ul class="collection">
+    {% for course in courses %}
+        <li class="collection-item">
+            <h3>{{ course }}</h3>
+            <a href="{% url 'home' %}/course_results/{{ course.id }}">View results</a>
+            <a id="{{ course.id }}" href="#">View participants</a>
+                <div id="participants-{{ course.id }}">
+                    {% for participant in course.participants.all %}
+                        <p>{{ participant }}</p>  <a id="{{ participant.id }}-{{ course.id }}" class="unenroll">Unenroll</a>
+                        {% endfor %}
+                </div>
+        </li>
+    {%  endfor %}
+</ul>
+</div>
+{% endblock %}
+{% block js %}
+<script type="text/javascript">
+$( document ).ready(function() {
+
+    $("[id^=participants-]").hide();
+
+    $('a').click(function () {
+        var id = $(this).attr('id');
+        $('#'+id).hide();
+        $('#participants-'+id).show();
+    })
+    $('.unenroll').click(function () {
+        var id = $(this).attr('id');
+        var courseid = id.split('-')[1];
+        var student = id.split('-')[0];
+        if (confirm('Are you sure you want to unenroll this student?')) {
+            $.ajax({
+                type: 'POST',
+                url: '/unenroll',
+
+                data: {
+                    course: courseid,
+                    student: student,
+                    csrfmiddlewaretoken: '{{ csrf_token }}',
+                    action: 'post'
+                },
+                success: function (json) {
+                    $("#response").html(json['message']);
+                    //$("#participants-"+courseid).load(document.URL );
+                },
+                error: function (xhr, errmsg, err) {
+                    console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+                }
+            });
+        }
+    })
+
+
+});
+        </script>
+{% endblock %}

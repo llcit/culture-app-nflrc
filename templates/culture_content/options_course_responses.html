@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+<br>
+
+<a class="waves-effect white btn" href="{% url 'home' %}course_results/{{ course_id }}/">Return to summaries</a>
+    <hr>
+<table id="results" class="display">
+
+        <thead>
+          <tr>
+              <th>Option</th>
+              <th>Attempts</th>
+              <th>% in agreement with experts</th>
+          </tr>
+        </thead>
+<tbody>
+{% for stat in stats %}
+          <tr>
+            <td>{{ stat.0 }}</td>
+            <td>{{ stat.1 }}</td>
+            <td>{{ stat.2 }}</td>
+          </tr>
+{% endfor %}
+</tbody>
+      </table>
+
+
+</div>
+{% endblock %}
+{% block js %}
+<script>
+$(document).ready( function () {
+    $('#results').DataTable();
+} );
+</script>
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="container">
+
+
+<h1>Available Courses</h1> You will need to input a valid enrollment key to register in a course.
+<br>
+<br>
+<div id="response"></div>
+<br>
+<ul class="collection with-header">
+
+    {% for course in courses %}
+        <li class="collection-item">
+            <h2> {{ course }}</h2>  <a id="{{ course.id }}" class="waves-effect waves-light btn modal-trigger">Enroll</a>
+            <div class="enrollment" id="enrollment-{{ course.id }}">
+                <form id="form-{{ course.id }}" method="POST">
+                    {% csrf_token %}
+                <input type="text" id="register-{{ course.id }}" required>
+                    <input type="hidden" id="course-{{ course.id }}" value="{{ course.id }}">
+                    <button type="submit" class="waves-effect waves-light btn-small">Register</button>
+                </form>
+                <br>
+            </div>
+        </li>
+    {%  endfor %}
+</ul>
+
+</div>
+
+
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+
+$( document ).ready(function() {
+
+    $('.enrollment*').hide();
+
+    $('a').click(function () {
+        var a_id = 'enrollment-' + $(this).attr('id');
+        $("#" + a_id).show();
+    });
+
+
+    $("[id^=form-]").submit(function (e) {
+        e.preventDefault();
+        var formid = $(this).closest('form').attr('id');
+        var courseid = formid.split('-').pop();
+        var key_id = 'register-'+courseid;
+        var key = $("#" + key_id).val();
+
+
+        $.ajax({
+            type: 'POST',
+            url: '/culture/enroll',
+
+            data: {
+                course: courseid,
+                key: key,
+                csrfmiddlewaretoken: '{{ csrf_token }}',
+                action: 'post'
+            },
+            success: function (json) {
+                if (json['response']==1){
+                    $("#response").html(json['message']);
+                    window.location.assign('https://lftic.lll.hawaii.edu/culture/profile');
+
+                }
+                else{
+                     $("#response").html(json['message']);
+
+                }
+            },
+            error: function (xhr, errmsg, err) {
+                console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+            }
+        });
+    });
+
+});
+</script>
+{% endblock %}

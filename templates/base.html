@@ -1,0 +1,86 @@
+{% load staticfiles %}
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="theme-color" content="#2196F3">
+    {% if '/C/' in request.path or  '?next=/culture/mod/C/' in request.get_full_path or '/Q/' in request.path %}
+
+    <title>CULTURE TIPS</title>
+    {% else %}
+    <title>CULTURE APP</title>
+    {% endif %}
+    <!-- CSS  -->
+
+   <link href="{% static '/assets/min/custom-min.css' %}" type="text/css" rel="stylesheet" >
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+   <link href="{% static '/assets/css/materialize.css' %}" type="text/css" rel="stylesheet" >
+    <link href="{% static '/assets/css/nouislider.css' %}" type="text/css" rel="stylesheet" >
+    <link href="{% static '/assets/css/rangeslider.css' %}" type="text/css" rel="stylesheet" >
+    <link href="{% static '/assets/css/new_style.css' %}" type="text/css" rel="stylesheet" >
+    <link href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet">
+    <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+</head>
+<body id="top" class="scrollspy">
+
+<!-- Pre Loader -->
+<div id="loader-wrapper">
+    <div id="loader"></div>
+
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+
+</div>
+
+<!--Navigation-->
+ <div class="navbar-fixed">
+    <nav id="nav_f" class="grey" role="navigation">
+        <div class="container">
+            <div class="nav-wrapper">
+                {% if '/C/' in request.path or course.language == 'C' or module.language == 'C' or user_language == 'C'  or module.language == 'Q' or '?next=/culture/mod/C/' in request.get_full_path or '/Q/' in request.path%}
+            <a href="{% url 'home'  %}mod/C/" class="navbar"> CULTURE TIPS</a>
+                {% else %}
+                <a href="{% url 'home' %}" class="navbar"> CULTURE APP</a>
+                {% endif %}
+                <a href="{% url 'user_profile' %}"  class="button-collapse"><i class="large material-icons">person</i></a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <a href="{% url 'user_profile' %}" class="navlink" ><i class="large material-icons">person</i></a>
+
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+</div>
+
+{% block content %}
+{% endblock %}
+
+
+<!--Footer
+<footer id="contact" class="page-footer blue-grey scrollspy">
+    <div class="footer-copyright blue">
+        <div class="container">
+            Made by The Tech Center
+        </div>
+
+</footer>-->
+
+
+    <!--  Scripts-->
+    <script src="{% static '/assets/js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static '/assets/min/custom-min.js' %}"></script>
+    <script src="{% static '/assets/js/materialize.min.js' %}"></script>
+    <script src="{% static '/assets/js/ajax.js' %}"></script>
+    <script src="{% static '/assets/js/nouislider.min.js' %}"></script>
+    <script src="{% static '/assets/js/create_slider.js' %}"></script>
+    <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+
+
+    {% block js %}
+    {% endblock %}
+    </body>
+</html>

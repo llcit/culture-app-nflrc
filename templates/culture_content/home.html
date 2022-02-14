@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <br>
+                <a href="{% url 'home' %}mod/L">
+                    <img src="{% static '/assets/img/quickstart-guide.jpg' %}" class="responsive-img">
+                </a>
+                <a href="{% url 'home' %}mod/A">
+                    <img src="{% static img_a %}"  class="responsive-img">
+                </a>
+                <a href="{% url 'home' %}mod/B">
+                    <img src="{% static img_a_ar %}"  class="responsive-img">
+                </a>
+                <!--<a href="{% url 'home' %}mod/C">
+                    <img src="{% static '/assets/img/china-347297-optimized.jpg' %}" class="responsive-img">
+                </a>-->
+
+                <a href="{% url 'home' %}mod/E">
+                    <img src="{% static  img_r_en %}" class="responsive-img">
+                </a>
+                <a href="{% url 'home' %}mod/R">
+                    <img src="{% static  img_r %}" class="responsive-img">
+                </a>
+
+                <a href="{% url 'home' %}mod/P">
+                    <img src="{% static  img_br_en %}" class="responsive-img">
+                </a>
+                <a href="{% url 'home' %}mod/D">
+                    <img src="{% static  img_br_por %}" class="responsive-img">
+                </a>
+
+                <a href="{% url 'home' %}mod/I">
+                    <img src="{% static  img_in %}" class="responsive-img">
+                </a>
+                <a href="{% url 'home' %}mod/T">
+                    <img src="{% static  img_tk %}" class="responsive-img">
+                </a>
+                <a href="{% url 'home' %}mod/H">
+                    <img src="{% static  img_hi %}" class="responsive-img">
+                </a>
+                <a href="{% url 'home' %}mod/U">
+                    <img src="{% static  img_ur %}" class="responsive-img">
+                </a>
+    <br>
+    <br>
+        <div class="center-align">
+                <img src="{% static '/assets/img/TechCenter-logo.png' %}" class="responsive-img">
+        </div>
+
+     <img src="{% static '/assets/img/cc-license.png' %}" class="responsive-img">
+    <br>
+    <br>
+</div>
+{% endblock %}
