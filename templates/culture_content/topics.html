@@ -4,7 +4,11 @@
 {% block content %}
 <div class="section scrollspy">
     <div class="container">
+     {% if topic.topic_image is not Null %}
+        <a href="{% url 'home' %}mod/{{ module.language }}/"><img src='/static/culture/media/{{ topic.topic_image }}' class="responsive-img"></a>
+    {% else %}
      <a href="{% url 'home' %}mod/{{ module.language }}/"><img src='/static/culture/media/{{ module.image_for_topics }}' class="responsive-img"></a>
+    {% endif %}
      <p>
         <a href="{% url 'home' %}mod/{{ module.language }}/">{{ module.name }}</a>
     </p>
