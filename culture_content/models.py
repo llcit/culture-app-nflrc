@@ -79,7 +79,7 @@ class Topic(models.Model):
     extension = models.TextField(verbose_name='Extension Task', blank=True)
     scenarios = models.ManyToManyField('Scenario')
     language = models.CharField (max_length=1, choices=lang_choices, blank=False)
-    topic_image = models.ImageField(null=True)
+    topic_image = models.ImageField(null=True, blank=True)
     author = models.ForeignKey (User, on_delete=models.CASCADE)
     order = models.IntegerField(blank=True, default=1)
 
