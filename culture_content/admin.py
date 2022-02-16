@@ -49,8 +49,14 @@ class TopicAdmin (admin.ModelAdmin):
             return Topic.objects.filter(Q(language__in=['P', 'D'])|Q(author=profile.user))
         elif profile.language == 'I':
             return Topic.objects.filter(Q(language__in=['A', 'B'])|Q(author=profile.user))
+        elif profile.language == 'H':
+            return Topic.objects.filter(Q(language__in=['H'])|Q(author=profile.user))
+        elif profile.language == 'U':
+            return Topic.objects.filter(Q(language__in=['U'])|Q(author=profile.user))
         elif profile.language == 'S':
             return Topic.objects.filter(Q(language__in=['I'])|Q(author=profile.user))
+        elif profile.language == 'T':
+            return Topic.objects.filter(Q(language__in=['T'])|Q(author=profile.user))
         else:
             return Topic.objects.filter(Q(language= profile.language)|Q(author=profile.user))
 
@@ -70,6 +76,18 @@ class ScenarioAdmin(admin.ModelAdmin):
             return Scenario.objects.filter(id__in=scenario_ids)
         elif profile.language == 'I':
             scenarios_topics = Topic.objects.filter(Q(language__in=['A', 'B'])|Q(author=profile.user))
+            scenario_ids = [scenario.pk for topic in scenarios_topics for scenario in topic.scenarios.all()]
+            return Scenario.objects.filter(id__in=scenario_ids)
+        elif profile.language == 'H':
+            scenarios_topics = Topic.objects.filter(Q(language__in=['H'])|Q(author=profile.user))
+            scenario_ids = [scenario.pk for topic in scenarios_topics for scenario in topic.scenarios.all()]
+            return Scenario.objects.filter(id__in=scenario_ids)
+        elif profile.language == 'U':
+            scenarios_topics = Topic.objects.filter(Q(language__in=['U'])|Q(author=profile.user))
+            scenario_ids = [scenario.pk for topic in scenarios_topics for scenario in topic.scenarios.all()]
+            return Scenario.objects.filter(id__in=scenario_ids)
+        elif profile.language == 'T':
+            scenarios_topics = Topic.objects.filter(Q(language__in=['T'])|Q(author=profile.user))
             scenario_ids = [scenario.pk for topic in scenarios_topics for scenario in topic.scenarios.all()]
             return Scenario.objects.filter(id__in=scenario_ids)
         elif profile.language == 'S':

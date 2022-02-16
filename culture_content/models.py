@@ -35,6 +35,9 @@ lang_profile = (
     ('I', 'All-Arabic'),
     ('O', 'All-Portuguese'),
     ('S', 'All-Indonesian'),
+    ('T', 'All-Turkish'),
+    ('H', 'All-Hindi'),
+    ('U', 'All-Urdu'),
     ('F', 'French'),
     ('W', 'Swahili')
 )
