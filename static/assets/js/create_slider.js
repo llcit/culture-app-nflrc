@@ -9,7 +9,7 @@ function create_slider(item){
                 '                        </div>\n' +
                 '                    </div>\n' +
                 '                    <div class="row valign-wrapper">\n' +
-                '                        <div class="col s2"><strong>Expert assessment</strong></div>\n' +
+                '                        <div class="col s2"><strong>Reference assessment</strong></div>\n' +
                 '                        <div class="col s8">\n' +
                 '                                <div class="' + class1 + '"></div>\n' +
                 '                        </div>\n' +
