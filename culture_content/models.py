@@ -20,11 +20,12 @@ lang_choices = (
     ('T', 'Turkish'),
     ('U', 'Urdu'),
     ('F', 'French'),
-    ('W', 'Swahili')
+    ('W', 'Swahili'),
+    ('Z', 'Chinese-in-English')
 )
 
 lang_profile = (
-    ('C', 'Chinese'),
+    ('C', 'All-Chinese'),
     ('R', 'Russian'),
     ('A', 'Arabic'),
     ('L', 'All'),
