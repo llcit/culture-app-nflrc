@@ -33,6 +33,10 @@ class TopicAdmin (admin.ModelAdmin):
     class Meta:
         model = Topic
         exclude = []
+
+    search_fields = ('name',)
+    list_display = ('name',)
+    list_filter = ('name',)
     scenarios = forms.ModelMultipleChoiceField(queryset=Topic.objects.all(),
                                                required=True,
                                                widget=FilteredSelectMultiple(
@@ -67,6 +71,9 @@ class ScenarioAdmin(admin.ModelAdmin):
     class Meta:
         model = Scenario
         exclude = []
+
+    search_fields = ('name',)
+    list_display = ('name',)
 
     def get_queryset(self, request):
         profile = Profile.objects.get(user = request.user)
@@ -106,10 +113,17 @@ class ScenarioAdmin(admin.ModelAdmin):
             return Scenario.objects.filter(id__in =scenario_ids)
 
 
+class ProfileAdmin(admin.ModelAdmin):
+    class Meta:
+        model = Profile
+        exclude = []
+    search_fields = ['user__username']
+
+
 admin.site.register(Module,  Media=TextMedia)
 admin.site.register(Scenario,  ScenarioAdmin, Media=TextMedia)
 admin.site.register(JudgmentTask, MCQuestionAdmin)
 admin.site.register(Topic, TopicAdmin,  Media=TextMedia)
 admin.site.register(Response)
 admin.site.register(LearningObjectives, Media=TextMedia)
-admin.site.register(Profile)
+admin.site.register(Profile, ProfileAdmin)
