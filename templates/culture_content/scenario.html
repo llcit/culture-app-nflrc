@@ -198,16 +198,12 @@
                 var chain = $.Deferred();
                 chain.resolve(promise=saveResponse(id, eval));
                 promises.push(promise);
-
-                promise.then(function (data) {
-                    //var jsonObject=[data.answer_id, [data.from, data.to], data.response_id, eval, data.content, data.feedback];
-                        //promises.push([data.answer_id, [data.from, data.to], data.response_id, eval, data.content, data.feedback]);
-                    create_slider([data.answer_id, [data.from, data.to], data.response_id, eval, data.content, data.feedback]);
-
+                });
+                Promise.all(promises).then(function (data) {
+                        data.forEach(element=>create_slider([element.answer_id, [element.from, element.to], element.response_id, element.response, element.content,
+                            element.feedback]));
                 });
 
-                });
-            console.log(promises.length);
             $("#preloader").show().delay(1000).fadeOut(500);
             $("#feedback").fadeIn(1500);
 
