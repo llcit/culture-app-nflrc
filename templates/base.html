@@ -7,12 +7,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
     <meta name="theme-color" content="#2196F3">
-    {% if '/C/' in request.path or  '?next=/culture/mod/C/' in request.get_full_path or '/Q/' in request.path %}
 
-    <title>CULTURE TIPS</title>
-    {% else %}
     <title>CULTURE APP</title>
-    {% endif %}
+
     <!-- CSS  -->
 
    <link href="{% static '/assets/min/custom-min.css' %}" type="text/css" rel="stylesheet" >
@@ -40,11 +37,7 @@
     <nav id="nav_f" class="grey" role="navigation">
         <div class="container">
             <div class="nav-wrapper">
-                {% if '/C/' in request.path or course.language == 'C' or module.language == 'C' or user_language == 'C'  or module.language == 'Q' or '?next=/culture/mod/C/' in request.get_full_path or '/Q/' in request.path%}
-            <a href="{% url 'home'  %}mod/C/" class="navbar"> CULTURE TIPS</a>
-                {% else %}
                 <a href="{% url 'home' %}" class="navbar"> CULTURE APP</a>
-                {% endif %}
                 <a href="{% url 'user_profile' %}"  class="button-collapse"><i class="large material-icons">person</i></a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                         <a href="{% url 'user_profile' %}" class="navlink" ><i class="large material-icons">person</i></a>

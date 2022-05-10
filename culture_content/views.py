@@ -12,16 +12,17 @@ import os
 
 @login_required
 def home(request):
-    img_r =[os.path.basename(r) for r in glob(r'/pythonapps/culture-app/static/assets/img/home_ru/*.jpg')]
-    img_r_en = [os.path.basename(r) for r in glob(r'/pythonapps/culture-app/static/assets/img/home_ru_en/*.jpg')]
-    img_a = [os.path.basename(d) for d in glob(r'/pythonapps/culture-app/static/assets/img/home_ar_en/*.jpg')]
-    img_a_ar = [os.path.basename(d) for d in glob(r'/pythonapps/culture-app/static/assets/img/home_ar/*.jpg')]
-    img_br_en = [os.path.basename(d) for d in glob(r'/pythonapps/culture-app/static/assets/img/home_br_en/*.jpg')]
-    img_br_por = [os.path.basename(d) for d in glob(r'/pythonapps/culture-app/static/assets/img/home_br_por/*.jpg')]
-    img_in = [os.path.basename(d) for d in glob(r'/pythonapps/culture-app/static/assets/img/home_in/*.jpg')]
-    img_ur = [os.path.basename(d) for d in glob(r'/pythonapps/culture-app/static/assets/img/home_ur/*.jpg')]
-    img_tk = [os.path.basename(d) for d in glob(r'/pythonapps/culture-app/static/assets/img/home_tk/*.jpg')]
-    img_hi = [os.path.basename(d) for d in glob(r'/pythonapps/culture-app/static/assets/img/home_hi/*.jpg')]
+    img_r =[os.path.basename(r) for r in glob(r'/web/static/culture/assets/img/home_ru/*.jpg')]
+    img_r_en = [os.path.basename(r) for r in glob(r'/web/static/culture/assets/img/home_ru_en/*.jpg')]
+    img_a = [os.path.basename(d) for d in glob(r'/web/static/culture/assets/img/home_ar_en/*.jpg')]
+    img_a_ar = [os.path.basename(d) for d in glob(r'/web/static/culture/assets/img/home_ar/*.jpg')]
+    img_br_en = [os.path.basename(d) for d in glob(r'/web/static/culture/assets/img/home_br_en/*.jpg')]
+    img_br_por = [os.path.basename(d) for d in glob(r'/web/static/culture/assets/img/home_br_por/*.jpg')]
+    img_in = [os.path.basename(d) for d in glob(r'/web/static/culture/assets/img/home_in/*.jpg')]
+    img_ur = [os.path.basename(d) for d in glob(r'/web/static/culture/assets/img/home_ur/*.jpg')]
+    img_tk = [os.path.basename(d) for d in glob(r'/web/static/culture/assets/img/home_tk/*.jpg')]
+    img_hi = [os.path.basename(d) for d in glob(r'/web/static/culture/assets/img/home_hi/*.jpg')]
+    img_ch = [os.path.basename(d) for d in glob(r'/web/static/culture/assets/img/home_ch/*.jpg')]
     return render(request, 'culture_content/home.html', {'img_r': 'assets/img/home_ru/'+random.choice(img_r),
                                                          'img_r_en': 'assets/img/home_ru_en/'+random.choice(img_r_en),
                                                          'img_a': 'assets/img/home_ar_en/'+random.choice(img_a),
@@ -30,7 +31,8 @@ def home(request):
                                                          'img_in':'assets/img/home_in/' + random.choice(img_in),
                                                          'img_ur':'assets/img/home_ur/' + random.choice(img_ur),
                                                          'img_tk':'assets/img/home_tk/' + random.choice(img_tk),
-                                                         'img_hi':'assets/img/home_hi/' + random.choice(img_hi)})
+                                                         'img_hi':'assets/img/home_hi/' + random.choice(img_hi),
+                                                         'img_ch':'assets/img/home_hi/' + random.choice(img_ch)})
 
 
 @login_required
