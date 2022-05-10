@@ -32,7 +32,7 @@ def home(request):
                                                          'img_ur':'assets/img/home_ur/' + random.choice(img_ur),
                                                          'img_tk':'assets/img/home_tk/' + random.choice(img_tk),
                                                          'img_hi':'assets/img/home_hi/' + random.choice(img_hi),
-                                                         'img_ch':'assets/img/home_hi/' + random.choice(img_ch)})
+                                                         'img_ch':'assets/img/home_ch/' + random.choice(img_ch)})
 
 
 @login_required
