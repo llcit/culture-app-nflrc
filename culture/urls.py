@@ -28,6 +28,7 @@ urlpatterns = [
     path('accounts/password_change/',TemplateView.as_view(template_name="registration/password_change_form.html"), name="password_change"),
     path('password-done', TemplateView.as_view(template_name="registration/password_change_done.html"), name="password_change_done"),
     path('grappelli/', include('grappelli.urls')),
+		path('tinymce/[id]',include('tinymce.urls')),
     #path('password_reset/', auth_views.password_reset, name='password_reset'),
 	 # path('password_reset/done/', auth_views.password_reset_done, name='password_reset_done'),
 	#	path('reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/', auth_views.password_reset_confirm, name='password_reset_confirm'),

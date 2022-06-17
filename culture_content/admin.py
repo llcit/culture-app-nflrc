@@ -3,18 +3,24 @@ from django.contrib.admin.widgets import FilteredSelectMultiple
 from django.db.models import Q
 from django.contrib import admin
 from .models import *
-
+from tinymce.widgets import TinyMCE
+'''
 class TextMedia:
     js = [
          '/static/grappelli/tinymce/jscripts/tiny_mce/tiny_mce.js',
         '/static/grappelli/tinymce_setup/tinymce_setup.js',
         ]
-
+'''
 
 class AnswerInline(admin.TabularInline):
     model = Answer
     exclude = ['feedback_initial']
     extra=4
+    formfield_overrides = {
+
+        models.TextField: {'widget': TinyMCE()}
+
+    }
 
 
 class MCQuestionAdmin(admin.ModelAdmin):
@@ -24,7 +30,11 @@ class MCQuestionAdmin(admin.ModelAdmin):
     list_display = ('name', )
     list_filter = ('name',)
     fields = ('name', 'description')
+    formfield_overrides = {
 
+        models.TextField: {'widget': TinyMCE()}
+
+    }
     search_fields = ('name', )
     inlines = [AnswerInline]
 
@@ -43,6 +53,11 @@ class TopicAdmin (admin.ModelAdmin):
                                                    verbose_name='Scenarios',
                                                    is_stacked=False)
                                                )
+    formfield_overrides = {
+
+        models.TextField: {'widget': TinyMCE()}
+
+    }
     filter_horizontal = ('scenarios',)
 
     def get_queryset(self, request):
@@ -74,6 +89,11 @@ class ScenarioAdmin(admin.ModelAdmin):
 
     search_fields = ('name',)
     list_display = ('name',)
+    formfield_overrides = {
+
+        models.TextField: {'widget': TinyMCE()}
+
+    }
 
     def get_queryset(self, request):
         profile = Profile.objects.get(user = request.user)
@@ -120,10 +140,10 @@ class ProfileAdmin(admin.ModelAdmin):
     search_fields = ['user__username']
 
 
-admin.site.register(Module,  Media=TextMedia)
-admin.site.register(Scenario,  ScenarioAdmin, Media=TextMedia)
+admin.site.register(Module)
+admin.site.register(Scenario,  ScenarioAdmin)
 admin.site.register(JudgmentTask, MCQuestionAdmin)
-admin.site.register(Topic, TopicAdmin,  Media=TextMedia)
+admin.site.register(Topic, TopicAdmin)
 admin.site.register(Response)
-admin.site.register(LearningObjectives, Media=TextMedia)
+admin.site.register(LearningObjectives)
 admin.site.register(Profile, ProfileAdmin)
