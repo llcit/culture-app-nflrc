@@ -3,7 +3,7 @@ import uuid
 
 class Config(models.Model):
 	device_name = models.CharField(max_length=155, blank=False)
-	ipaddress = models.IPAddressField(unique=True, blank=False)
+	ipaddress = models.GenericIPAddressField(unique=True, blank=False)
 	key = models.CharField(max_length=155,unique=True, default=uuid.uuid4(), blank=False)
 
 	def __str__(self):
@@ -11,8 +11,8 @@ class Config(models.Model):
 
 
 class TokenApi(models.Model):
-	device = models.ForeignKey(Config)
-	token = models.CharField(255, blank=False)
+	device = models.ForeignKey(Config, on_delete=models.CASCADE)
+	token = models.CharField(max_length=255, blank=False)
 	valid_until = models.DateTimeField(blank=False)
 
 	def __str__(self):
