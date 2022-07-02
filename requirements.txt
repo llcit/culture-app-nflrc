@@ -1,10 +1,12 @@
-#requirements file
+asgiref==3.4.1
 certifi==2019.11.28
 chardet==3.0.4
 defusedxml==0.6.0
-Django==2.0
-django-grappelli==2.13.3
+Django==3.2.13
+django-grappelli==2.14.3
+django-tinymce4-lite==1.8.0
 idna==2.8
+jsmin==3.0.1
 oauthlib==3.1.0
 Pillow==7.0.0
 PyJWT==1.7.1
@@ -16,4 +18,6 @@ simplejson==3.17.0
 six==1.13.0
 social-auth-app-django==3.1.0
 social-auth-core==3.2.0
+sqlparse==0.4.2
+typing-extensions==4.1.1
 urllib3==1.25.7
