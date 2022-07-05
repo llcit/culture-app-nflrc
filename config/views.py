@@ -4,7 +4,7 @@ import hashlib
 import random
 import datetime
 
-@login_required
+
 def verify_device(config):
 	if Config.objects.filter(ipaddress=config['ip'], key=config['key']).exists():
 		obj = Config.objects.get(ipaddress=config['ip'], key=config['key'])
