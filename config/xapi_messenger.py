@@ -6,13 +6,10 @@ import uuid
 from typing import Dict
 
 from django.urls import reverse
-from culture_content.models import Response, Scenario
+from culture_content.models import Response, Scenario, Module, Topic
 
-# Dashboard connection stuff
-DASHBOARD_ENDPOINT = '****'
-DASHBOARD_CULTUREAPP_ENDPOINT = '****'
-# LRS is the Learning Record Store
-DASHBOARD_LRS_ENDPOINT = "****"
+from culture.settings import DASHBOARD_CULTUREAPP_ENDPOINT, DASHBOARD_LRS_ENDPOINT, DASHBOARD_TOKEN
+
 
 class DashboardActor:
     def __init__(self, name, mbox, object_type):
@@ -46,10 +43,12 @@ class DashboardData:
 
 
 class DashboardObject:
-    def __init__(self, activity_type_id='', activity_name='', url=''):
+    def __init__(self, activity_type_id='', activity_name='', url='', mod='', topic=''):
         self.activity_type_id = activity_type_id
         self.activity_name = activity_name
         self.url = url
+        self.related_module = mod
+        self.related_module_topic = topic
 
     def set_object_url(self, url):
         self.url = url
@@ -61,6 +60,10 @@ class DashboardObject:
                 "type": self.activity_type_id,
                 "name": {
                     "en-US": self.activity_name
+                },
+                "extensions": {
+                    "https://languageflagshipdashboard.com/culture_module_language": self.related_module,
+                    "https://languageflagshipdashboard.com/culture_module_topic": self.related_module_topic,
                 }
             },
             "objectType": 'Activity'
@@ -101,44 +104,57 @@ class DashboardVerb:
 
 class DashboardSyncTaskActivity:
     def __init__(self, request_data):
-        self.response = {}
-        last_rec = datetime.datetime.fromisoformat(request_data[1])
-        responses = Response.objects.filter(user__pk=request_data[0].pk).filter(responded__gt=last_rec)
-        
-        for i in responses:
-            score_data = {
-                'raw': float(i.response), 
-                'min': float(i.answer.rating_from), 
-                'max': float(i.answer.rating_to),
-            }
-
-            response_in_range = i.response>=i.answer.rating_from and i.response<=i.answer.rating_to
-            scenario = Scenario.objects.get(judgment_task__pk=i.answer.task.pk)
-            scenario_url = reverse('scenario', args=[scenario.pk])
-            
-            result = DashboardResultJudgementTask(score_data, True, response_in_range, i.responded).to_dict()
-            verb = DashboardVerb(verb_type_id='http://adlnet.gov/expapi/verbs/completed', verb_name='Completed a Judgement Task').to_dict()
-            actor = DashboardActor('', request_data[0].email, 'Agent').to_dict()
-            xobj = DashboardObject(activity_type_id='http://adlnet.gov/expapi/activities/Activity', activity_name='CultureApp Scenario: '+scenario.name+': '+i.answer.task.name, url=DASHBOARD_CULTUREAPP_ENDPOINT+scenario_url).to_dict()
-
-            try:
-                dashboard_data = DashboardData(actor, result, verb, xobj).to_dict()
-                endpoint = DASHBOARD_ENDPOINT+'/statements?statementId='+dashboard_data['id']
-                
-                headers = {
-                    'X-Experience-API-Version' : '1.0.3',
-                    'Content-Type' : 'application/json',
-                    'Authorization' : os.getenv("DASHBOARD_TOKEN")
+        self.response = {'RESULT_MESSAGE': '', 'RESULT_DATA': ''}
+        responses = Response.objects.filter(user__pk=request_data[0].pk)
+        if request_data[1]: # last record timestamp provided
+            last_rec = datetime.datetime.fromisoformat(request_data[1])
+            responses = responses.filter(responded__gt=last_rec)
+        responses = responses.order_by('-responded')
+        if not responses:
+            self.response['RESULT_MESSAGE'] = 'User does not have any stored data on Culture App.'
+        else:    
+            for i in responses:
+                score_data = {
+                    'raw': float(i.response), 
+                    'min': float(i.answer.rating_from), 
+                    'max': float(i.answer.rating_to),
                 }
-                # print(endpoint+'\n', json.dumps(headers, indent=2), json.dumps(dashboard_data, indent=2))
-                req = requests.put(endpoint, headers=headers, data=json.dumps(dashboard_data), timeout=2)    
-                self.response = req.text
+
+                response_in_range = i.response>=i.answer.rating_from and i.response<=i.answer.rating_to
+                try: 
+                    scenario = Scenario.objects.filter(judgment_task__pk=i.answer.task.pk)[0]
+                    scenario_url = reverse('scenario', args=[scenario.pk])
+
+                    topic = Topic.objects.filter(scenarios=scenario)[0]
+                    topic_url = reverse('topic-scenarios', args=[topic.pk])
+                    module = Module.objects.filter(topics=topic)[0]
+                    module_url = reverse('modules', args=[module.language])
+
+                    result = DashboardResultJudgementTask(score_data, True, response_in_range, i.responded).to_dict()
+                    verb = DashboardVerb(verb_type_id='http://adlnet.gov/expapi/verbs/completed', verb_name='Completed a Judgement Task').to_dict()
+                    actor = DashboardActor('', request_data[0].email, 'Agent').to_dict()
+                    xobj = DashboardObject(activity_type_id='http://adlnet.gov/expapi/activities/Activity', activity_name='Culture App Scenario', url=DASHBOARD_CULTUREAPP_ENDPOINT+scenario_url, mod=DASHBOARD_CULTUREAPP_ENDPOINT+module_url, topic=DASHBOARD_CULTUREAPP_ENDPOINT+topic_url ).to_dict()
+                except:
+                    pass
                 
-            except Exception as e:
-                print(e)
 
-
-
+                try:
+                    dashboard_data = DashboardData(actor, result, verb, xobj).to_dict()
+                    endpoint = DASHBOARD_LRS_ENDPOINT+'/statements?statementId='+dashboard_data['id']
+                    
+                    headers = {
+                        'X-Experience-API-Version' : '1.0.3',
+                        'Content-Type' : 'application/json',
+                        'Authorization' : DASHBOARD_TOKEN
+                    }
+                    print(endpoint+'\n', json.dumps(headers, indent=2), json.dumps(dashboard_data, indent=2))
+                    # req = requests.put(endpoint, headers=headers, data=json.dumps(dashboard_data), timeout=2)    
+                    # self.response['RESULT'] = req.text
+                    
+                except Exception as e:
+                    print(e)
+            
+            self.response['RESULT_DATA'] = len(responses)
 
 
 

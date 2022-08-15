@@ -11,3 +11,4 @@ lib64*
 bin/
 include/
 pip-selfcheck.json
+.DS_Store

@@ -8,7 +8,8 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
-from culture_content.models import Response
+from culture_content.models import Response, Scenario, Module, Topic
+
 from .xapi_messenger import DashboardSyncTaskActivity
 
 from .models import Config, TokenApi
@@ -51,37 +52,60 @@ def authenticate_request(params):
 		return valid_device 
 	return {'message': 'OK', 'token': token}
 
-def build_xapi_msg(data):
-	return json.dumps(data)
-
 
 @csrf_exempt
-def get_modules_view(request):
+def get_module_info(request):
 	auth = authenticate_request(request.POST)
-	if 'token' in auth:
+	if 'token' in auth:	
+		try:
+			module_code = request.POST['module_url'].strip('/').split('/')[-1]
+			module_objs = Module.objects.filter(language=module_code)
+			module_lang = module_objs[0].get_language_display()
+			module_topics = [i.topics.all() for i in module_objs]
+			topic_count = 0
+			scenario_count = 0
+			for i in module_topics:
+				topics = [j for j in i]
+				topic_count = topic_count + len(topics)
+				for k in topics:
+					scenario_count = scenario_count + k.scenarios.all().count()
+			data = {''}
+			auth['RESULT_LOG'] = { \
+					'RESULT_MESSAGE': '', 
+					'RECORD_DATA': {
+						'Culture App Language': module_lang, 
+						'Modules': module_objs.count(), 
+						'Topics': topic_count, 
+						'Scenarios': scenario_count}
+				}
+		except:
+			auth['ERROR_LOG'] = 'Error retrieving Module information.'
 		
-		# Get list of modules...
-
-
-
 		return HttpResponse('AUTHENTICATION: ' + json.dumps(auth))
 	else:
-		return HttpResponse('AUTHENTICATION: ' + 'FAILED')
+		return HttpResponse('AUTHENTICATION: ' + json.dumps(auth))
 
 
 @csrf_exempt
 def get_user_activity(request):
 	auth = authenticate_request(request.POST)
-	
-	if 'token' in auth:
-		user_obj = User.objects.filter(email=request.POST['user_id'])
-		if user_obj:
-			task = DashboardSyncTaskActivity((user_obj.get(), request.POST['last_rec']))
-			auth['USER_LOG'] = task.response
-		# Get activity data for user
-		return HttpResponse('AUTHENTICATION: ' + json.dumps(auth))
-	else:
-		return HttpResponse('AUTHENTICATION: ' + 'FAILED')		
+	try:
+		if 'token' in auth:
+			user_obj = User.objects.filter(email=request.POST['user_id'])
+			if user_obj:
+				# Get activity data for user/push to LRS
+				task = DashboardSyncTaskActivity((user_obj[0], request.POST['last_rec']))
+				auth['RESULT_LOG'] = task.response
+			else:
+				auth['ERROR_LOG'] = 'User not found.'
+			
+			return HttpResponse('AUTHENTICATION: ' + json.dumps(auth))
+		else:
+			return HttpResponse('AUTHENTICATION: ' + json.dumps({'message': 'FAILED'}))
+	except Exception as e:
+		print(e)
+		auth['ERROR_LOG'] = 'Bad request.'
+		return HttpResponse('AUTHENTICATION: ' + json.dumps(auth))			
 
 """
 I added a configuration app to the Culture app to be able to manage the device validation. You can just do a fetch and merge in git. 
