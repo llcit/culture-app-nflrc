@@ -56,6 +56,7 @@ def authenticate_request(params):
 @csrf_exempt
 def get_module_info(request):
 	auth = authenticate_request(request.POST)
+	auth['ERROR_LOG'] = ''
 	if 'token' in auth:	
 		try:
 			module_code = request.POST['module_url'].strip('/').split('/')[-1]
@@ -72,7 +73,7 @@ def get_module_info(request):
 			data = {''}
 			auth['RESULT_LOG'] = { \
 					'RESULT_MESSAGE': '', 
-					'RECORD_DATA': {
+					'RESULT_DATA': {
 						'Culture App Language': module_lang, 
 						'Modules': module_objs.count(), 
 						'Topics': topic_count, 
@@ -89,6 +90,7 @@ def get_module_info(request):
 @csrf_exempt
 def get_user_activity(request):
 	auth = authenticate_request(request.POST)
+	auth['ERROR_LOG'] = ''
 	try:
 		if 'token' in auth:
 			user_obj = User.objects.filter(email=request.POST['user_id'])
