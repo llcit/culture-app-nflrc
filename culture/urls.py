@@ -53,5 +53,6 @@ urlpatterns = [
 	  path('enroll', enroll_course, name='enroll'),
 		path('unenroll', remove_user_from_course, name ="unenroll"),
     path('dashboard', get_profile, name='profile'),
-    path('profile', get_user_data, name='user_profile')
+    path('profile', get_user_data, name='user_profile'),
+		path('api/', include('config.urls'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
