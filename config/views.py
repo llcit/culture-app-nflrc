@@ -14,7 +14,7 @@ from .xapi_messenger import DashboardSyncTaskActivity
 
 from .models import Config, TokenApi
 
-
+@csrf_exempt
 def verify_device(config):
 	if Config.objects.filter(ipaddress=config['ip'], key=config['key']).exists():
 		obj = Config.objects.get(ipaddress=config['ip'], key=config['key'])
@@ -29,7 +29,7 @@ def verify_device(config):
 	else:
 		return {'message': 'KO'}
 
-
+@csrf_exempt
 def token_is_valid(token):
 	hash = hashlib.sha256(token.encode('utf-8'))
 	try:
@@ -39,10 +39,9 @@ def token_is_valid(token):
 		else:
 			return False
 	except Exception as e:
-		print(e)
 		return False
 
-
+@csrf_exempt
 def authenticate_request(params):
 	token = params.get('token', '')
 	if not token_is_valid(token):
@@ -105,8 +104,7 @@ def get_user_activity(request):
 		else:
 			return HttpResponse('AUTHENTICATION: ' + json.dumps({'message': 'FAILED'}))
 	except Exception as e:
-		print(e)
-		auth['ERROR_LOG'] = 'Bad request.'
+		auth['ERROR_LOG'] = 'Bad request. ' + str(e)
 		return HttpResponse('AUTHENTICATION: ' + json.dumps(auth))			
 
 """
