@@ -3,11 +3,12 @@ import json
 import os
 import requests
 import uuid
+from dateutil.parser import isoparse
 from typing import Dict
+
 
 from django.urls import reverse
 from culture_content.models import Response, Scenario, Module, Topic
-
 from culture.settings import DASHBOARD_CULTUREAPP_ENDPOINT, DASHBOARD_LRS_ENDPOINT, DASHBOARD_TOKEN
 
 
@@ -107,11 +108,11 @@ class DashboardSyncTaskActivity:
         self.response = {'RESULT_MESSAGE': '', 'RESULT_DATA': ''}
         responses = Response.objects.filter(user__pk=request_data[0].pk)
         if request_data[1]: # last record timestamp provided
-            last_rec = datetime.datetime.fromisoformat(request_data[1])
+            last_rec = isoparse(request_data[1])
             responses = responses.filter(responded__gt=last_rec)
         responses = responses.order_by('-responded')
         if not responses:
-            self.response['RESULT_MESSAGE'] = 'User does not have any stored data on Culture App.'
+            self.response['RESULT_MESSAGE'] = 'User does not have new data on Culture App.'
         else:    
             for i in responses:
                 score_data = {
@@ -130,10 +131,12 @@ class DashboardSyncTaskActivity:
                     module = Module.objects.filter(topics=topic)[0]
                     module_url = reverse('modules', args=[module.language])
 
+                    ENDPOINT = DASHBOARD_CULTUREAPP_ENDPOINT.rstrip('/')
+
                     result = DashboardResultJudgementTask(score_data, True, response_in_range, i.responded).to_dict()
                     verb = DashboardVerb(verb_type_id='http://adlnet.gov/expapi/verbs/completed', verb_name='Completed a Judgement Task').to_dict()
                     actor = DashboardActor('', request_data[0].email, 'Agent').to_dict()
-                    xobj = DashboardObject(activity_type_id='http://adlnet.gov/expapi/activities/Activity', activity_name='Culture App Scenario', url=DASHBOARD_CULTUREAPP_ENDPOINT+scenario_url, mod=DASHBOARD_CULTUREAPP_ENDPOINT+module_url, topic=DASHBOARD_CULTUREAPP_ENDPOINT+topic_url ).to_dict()
+                    xobj = DashboardObject(activity_type_id='http://adlnet.gov/expapi/activities/Activity', activity_name='Culture App Scenario', url=ENDPOINT+scenario_url, mod=ENDPOINT+module_url, topic=ENDPOINT+topic_url ).to_dict()
                 except:
                     pass
                 
@@ -148,11 +151,11 @@ class DashboardSyncTaskActivity:
                         'Authorization' : DASHBOARD_TOKEN
                     }
                     # print(endpoint+'\n', json.dumps(headers, indent=2), json.dumps(dashboard_data, indent=2))
-                    req = requests.put(endpoint, headers=headers, data=json.dumps(dashboard_data), timeout=2)    
+                    # req = requests.put(endpoint, headers=headers, data=json.dumps(dashboard_data), timeout=2)    
                     # self.response['RESULT'] = req.text
                     
                 except Exception as e:
-                    print(e)
+                    pass
             
             self.response['RESULT_DATA'] = len(responses)
 
