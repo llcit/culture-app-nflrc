@@ -38,8 +38,21 @@ class MCQuestionAdmin(admin.ModelAdmin):
     search_fields = ('name', )
     inlines = [AnswerInline]
 
+class ModuleAdmin(admin.ModelAdmin):
+    class Meta:
+        model = Module
+        exclude = []
 
-class TopicAdmin (admin.ModelAdmin):
+    formfield_overrides = {
+
+        models.TextField: {'widget': TinyMCE()}
+
+    }
+
+    filter_horizontal = ('topics',)
+
+
+class TopicAdmin(admin.ModelAdmin):
     class Meta:
         model = Topic
         exclude = []
@@ -51,7 +64,7 @@ class TopicAdmin (admin.ModelAdmin):
                                                required=True,
                                                widget=FilteredSelectMultiple(
                                                    verbose_name='Scenarios',
-                                                   is_stacked=False)
+                                                   is_stacked=True)
                                                )
     formfield_overrides = {
 
@@ -140,7 +153,7 @@ class ProfileAdmin(admin.ModelAdmin):
     search_fields = ['user__username']
 
 
-admin.site.register(Module)
+admin.site.register(Module, ModuleAdmin)
 admin.site.register(Scenario,  ScenarioAdmin)
 admin.site.register(JudgmentTask, MCQuestionAdmin)
 admin.site.register(Topic, TopicAdmin)
