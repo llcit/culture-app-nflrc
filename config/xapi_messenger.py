@@ -151,8 +151,8 @@ class DashboardSyncTaskActivity:
                         'Authorization' : DASHBOARD_TOKEN
                     }
                     # print(endpoint+'\n', json.dumps(headers, indent=2), json.dumps(dashboard_data, indent=2))
-                    # req = requests.put(endpoint, headers=headers, data=json.dumps(dashboard_data), timeout=2)    
-                    # self.response['RESULT'] = req.text
+                    req = requests.put(endpoint, headers=headers, data=json.dumps(dashboard_data), timeout=2)    
+                    self.response['RESULT'] = req.text
                     
                 except Exception as e:
                     pass
