@@ -34,7 +34,7 @@ def home(request):
                                                          'img_tk':'assets/img/home_tk/' + random.choice(img_tk),
                                                          'img_hi':'assets/img/home_hi/' + random.choice(img_hi),
                                                          'img_ch':'assets/img/home_ch/' + random.choice(img_ch),
-                                                         'img_ch_en': 'assets/img/home_ch_en)/' + random.choice(img_ch_en) })
+                                                         'img_ch_en': 'assets/img/home_ch_en/' + random.choice(img_ch_en) })
 
 
 @login_required
