@@ -109,12 +109,3 @@ def get_user_activity(request):
 		auth['ERROR_LOG'] = 'Bad request.'
 		return HttpResponse('AUTHENTICATION: ' + json.dumps(auth))			
 
-"""
-I added a configuration app to the Culture app to be able to manage the device validation. You can just do a fetch and merge in git. 
-
-Basically, the device config (https://github.com/aitor-arronte/culture-app/tree/main/config) asks for the ip and key from the requester that will be stored in the db: https://github.com/aitor-arronte/culture-app/blob/main/config/models.py 
-
-Every request should be passed through the following two functions: https://github.com/aitor-arronte/culture-app/blob/main/config/views.py The first time the requester requests (if they don't have a token yet) the API that you are developing will need to call the function verify_device() and provide ip and key, then you will receive a token that will be valid for 2 days. The requester will need to store this value in their database. For every subsequent request you only need to verify that the token is still valid by calling token_is_valid() function. If it returns false that means that a new token will need to be created and the function verify_device() will need to be called again and follow that process.
-
-The only thing to remember is that the database stores a sha-256 hash in hexadecimal of the actual token that is returned to the user. That conversion and checking is handled in both functions, but just to remember.
-"""
