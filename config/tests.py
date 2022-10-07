@@ -1,15 +1,18 @@
 from django.test import TestCase
+from datetime import datetime, timezone
 # from unittest import TestCase
 import json
+
 import requests
 from culture.settings import DASHBOARD_CULTUREAPP_ENDPOINT, DASHBOARD_LRS_ENDPOINT, DASHBOARD_TOKEN
 
 
 class APITestCase(TestCase):
     def setUp(self):
-        self.key = 'f1daa5be-42e9-4dae-8f39-6d22764cfb80'
-        self.ip = '127.0.0.1'
-        self.token = 'jbxwzih#!otw7kourqdohu2ccg1kimq25r72f#umopxy4g.9kvzfov60l5t'
+        self.key = '***'
+        # self.ip = '127.0.0.1'
+        self.ip = '168.105.83.47'
+        self.token = '1h8#0h2jqre12kn75w87#ffuw9pq12hxbnm0erctd4a6exxfr1f8c2aid69'
 
     def test_authentication_denied(self):
         """Verify authentication token is inited or renewed (uses get-module-info call)
@@ -42,11 +45,10 @@ class APITestCase(TestCase):
         self.assertIn(data['message'], ['OK', 'RENEWED'])
 
     def test_sync_judgment_task_activity(self):
-        """Verify LRS record push 
-            should return records only after login date.
+        """Verify LRS record push should return records only after login date.
         """
         user_id = 'rmedina@hawaii.edu'
-        last_record = '2022-07-08 02:49:00.879897+00:00'
+        last_record = '2022-06-22 02:49:00.879897+00:00'
         endpoint = DASHBOARD_CULTUREAPP_ENDPOINT+'/api/get-activity/'
         payload = {
             'ip': self.ip, 
@@ -57,8 +59,9 @@ class APITestCase(TestCase):
         }
         r = requests.post(endpoint, data=payload)
         data = json.loads(r.text[16:])
+        print(data)
         resp = data['RESULT_LOG']
-        self.assertEqual(resp['RESULT_DATA'], 2)
+        self.assertEqual(resp['RESULT_DATA'], 6)
 
     def test_sync_judgment_task_activity_null_date(self):
         """Verify LRS record push with null login date 
@@ -77,7 +80,7 @@ class APITestCase(TestCase):
         r = requests.post(endpoint, data=payload)
         data = json.loads(r.text[16:])
         resp = data['RESULT_LOG']
-        self.assertEqual(resp['RESULT_DATA'], 6)
+        self.assertEqual(resp['RESULT_DATA'], 25)
 
     def test_sync_judgment_task_activity_non_user(self):
         """ Verify detection of non registered user id in Culture App"""
