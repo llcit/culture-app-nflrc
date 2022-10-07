@@ -189,7 +189,7 @@ class Answer(models.Model):
     rating_to = models.DecimalField(verbose_name='Rating To', max_digits=2, decimal_places=1)
 
     def get_responses(self):
-        users = User.objects.exclude(id__in=(1, 3))
+        users = User.objects.all()
         responses = Response.objects.filter(answer=self, user__in=users)
         return responses
 
