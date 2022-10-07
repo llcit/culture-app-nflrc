@@ -23,6 +23,7 @@ def home(request):
     img_tk = [os.path.basename(d) for d in glob(r'/web/static/culture/assets/img/home_tk/*.jpg')]
     img_hi = [os.path.basename(d) for d in glob(r'/web/static/culture/assets/img/home_hi/*.jpg')]
     img_ch = [os.path.basename(d) for d in glob(r'/web/static/culture/assets/img/home_ch/*.jpg')]
+    img_ch_en = [os.path.basename(d) for d in glob(r'/web/static/culture/assets/img/home_ch_en/*.jpg')]
     return render(request, 'culture_content/home.html', {'img_r': 'assets/img/home_ru/'+random.choice(img_r),
                                                          'img_r_en': 'assets/img/home_ru_en/'+random.choice(img_r_en),
                                                          'img_a': 'assets/img/home_ar_en/'+random.choice(img_a),
@@ -32,7 +33,8 @@ def home(request):
                                                          'img_ur':'assets/img/home_ur/' + random.choice(img_ur),
                                                          'img_tk':'assets/img/home_tk/' + random.choice(img_tk),
                                                          'img_hi':'assets/img/home_hi/' + random.choice(img_hi),
-                                                         'img_ch':'assets/img/home_ch/' + random.choice(img_ch)})
+                                                         'img_ch':'assets/img/home_ch/' + random.choice(img_ch),
+                                                         'img_ch_en': 'assets/img/home_ch_en)/' + random.choice(img_ch_en) })
 
 
 @login_required
@@ -134,17 +136,22 @@ def get_scenario_results(scenario_id, user=None, users=None):
         results = []
         responses = 0
         if user is not None:
-            answer_responses=answer.get_user_responses([user])
+            answer_responses=answer.get_user_responses([user.id])
         elif users is not None:
             answer_responses=answer.get_user_responses(users)
         else:
             answer_responses=answer.get_responses()
-        for res in answer_responses:
-            responses += 1
-            if res.response >= res.answer.rating_from and res.response <= res.answer.rating_to:
-                results.append(1)
-            else:
-                results.append(0)
+
+        if answer_responses is not None:
+
+            for res in answer_responses:
+                responses += 1
+                if res.response >= res.answer.rating_from and res.response <= res.answer.rating_to:
+                    results.append(1)
+                else:
+                    results.append(0)
+        else:
+            results= 0
         attempts.append(round(len(results)))
         if len(results)>0:
             stats.append(round(100 * (sum (results)/len(results))))
