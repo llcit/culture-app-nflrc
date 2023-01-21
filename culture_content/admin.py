@@ -152,11 +152,22 @@ class ProfileAdmin(admin.ModelAdmin):
         exclude = []
     search_fields = ['user__username']
 
+class LearningObjectiveAdmin(admin.ModelAdmin):
+    class Meta:
+        model = LearningObjectives
+        exclude = []
+
+    formfield_overrides = {
+
+        models.TextField: {'widget': TinyMCE()}
+
+    }
+
 
 admin.site.register(Module, ModuleAdmin)
 admin.site.register(Scenario,  ScenarioAdmin)
 admin.site.register(JudgmentTask, MCQuestionAdmin)
 admin.site.register(Topic, TopicAdmin)
 admin.site.register(Response)
-admin.site.register(LearningObjectives)
+admin.site.register(LearningObjectives, LearningObjectiveAdmin)
 admin.site.register(Profile, ProfileAdmin)
