@@ -117,7 +117,7 @@ class ScenarioAdmin(admin.ModelAdmin):
             scenario_ids = [scenario.pk for topic in scenarios_topics for scenario in topic.scenarios.all()]
             return Scenario.objects.filter(id__in=scenario_ids)
         elif profile.language == 'I':
-            scenarios_topics = Topic.objects.filter(Q(language__in=['A', 'B'])|Q(author=profile.user))
+            scenarios_topics = Topic.objects.filter(Q(language__in=['I'])|Q(author=profile.user))
             scenario_ids = [scenario.pk for topic in scenarios_topics for scenario in topic.scenarios.all()]
             return Scenario.objects.filter(id__in=scenario_ids)
         elif profile.language == 'C':
@@ -137,7 +137,7 @@ class ScenarioAdmin(admin.ModelAdmin):
             scenario_ids = [scenario.pk for topic in scenarios_topics for scenario in topic.scenarios.all()]
             return Scenario.objects.filter(id__in=scenario_ids)
         elif profile.language == 'S':
-            scenarios_topics = Topic.objects.filter(Q(language__in=['I'])|Q(author=profile.user))
+            scenarios_topics = Topic.objects.filter(Q(language__in=['A', 'B'])|Q(author=profile.user))
             scenario_ids = [scenario.pk for topic in scenarios_topics for scenario in topic.scenarios.all()]
             return Scenario.objects.filter(id__in=scenario_ids)
         else:
