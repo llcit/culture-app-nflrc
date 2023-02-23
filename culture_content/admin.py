@@ -82,13 +82,13 @@ class TopicAdmin(admin.ModelAdmin):
         elif profile.language == 'C':
             return Topic.objects.filter(Q(language__in=['C', 'Z'])|Q(author=profile.user))
         elif profile.language == 'I':
-            return Topic.objects.filter(Q(language__in=['A', 'B'])|Q(author=profile.user))
+            return Topic.objects.filter(Q(language__in=['I'])|Q(author=profile.user))
         elif profile.language == 'H':
             return Topic.objects.filter(Q(language__in=['H'])|Q(author=profile.user))
         elif profile.language == 'U':
             return Topic.objects.filter(Q(language__in=['U'])|Q(author=profile.user))
         elif profile.language == 'S':
-            return Topic.objects.filter(Q(language__in=['I'])|Q(author=profile.user))
+            return Topic.objects.filter(Q(language__in=['A', 'B'])|Q(author=profile.user))
         elif profile.language == 'T':
             return Topic.objects.filter(Q(language__in=['T'])|Q(author=profile.user))
         else:
