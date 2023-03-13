@@ -21,6 +21,7 @@ lang_choices = (
     ('U', 'Urdu'),
     ('F', 'French'),
     ('W', 'Swahili'),
+    ('Y', 'Swahili-in-Swahili'),
     ('Z', 'Chinese-in-English')
 )
 
@@ -40,7 +41,8 @@ lang_profile = (
     ('H', 'All-Hindi'),
     ('U', 'All-Urdu'),
     ('F', 'French'),
-    ('W', 'Swahili')
+    ('W', 'Swahili'),
+    ('Y', 'Swahili-in-Swahili'),
 )
 
 user_choices = (
