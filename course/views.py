@@ -69,7 +69,7 @@ def get_user_data(request):
 @login_required
 def get_courses(request):
 	profile = Profile.objects.get(user=request.user)
-	courses = Course.objects.exclude(participants__in=[profile])
+	courses = Course.objects.exclude(participants__in=[profile]).order_by('name')
 	return render(request, 'course/courses.html', {'courses': courses})
 
 
