@@ -16,7 +16,11 @@ class AnswerInline(admin.TabularInline):
     model = Answer
     exclude = ['feedback_initial']
     extra=4
+    formfield_overrides = {
 
+        models.TextField: {'widget': TinyMCE()}
+
+    }
 
 
 class MCQuestionAdmin(admin.ModelAdmin):
