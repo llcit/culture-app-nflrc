@@ -156,6 +156,7 @@ class LearningObjectiveAdmin(admin.ModelAdmin):
     class Meta:
         model = LearningObjectives
         exclude = []
+    search_fields = ['name']
 
     formfield_overrides = {
 
