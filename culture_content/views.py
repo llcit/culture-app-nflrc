@@ -1,6 +1,7 @@
 from .models import *
 from django.shortcuts import render, get_list_or_404, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.utils.html import strip_tags
 from django.http import HttpResponse
 import simplejson
 from django.http import JsonResponse, HttpResponseForbidden
@@ -67,7 +68,7 @@ def save_response(request, answer_id, response):
         expert ={}
         expert['answer_id'] = answer_id
         expert['content'] = answer.content
-        expert['feedback'] = answer.feedback_final
+        expert['feedback'] = strip_tags(answer.feedback_final)
         expert['from']=answer.rating_from
         expert['to'] = answer.rating_to
         expert['response_id'] = response.pk
