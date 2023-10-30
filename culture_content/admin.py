@@ -16,11 +16,7 @@ class AnswerInline(admin.TabularInline):
     model = Answer
     exclude = ['feedback_initial']
     extra=4
-    formfield_overrides = {
 
-        models.TextField: {'widget': TinyMCE()}
-
-    }
 
 
 class MCQuestionAdmin(admin.ModelAdmin):
@@ -30,7 +26,11 @@ class MCQuestionAdmin(admin.ModelAdmin):
     list_display = ('name', )
     list_filter = ('name',)
     fields = ('name', 'description')
+    formfield_overrides = {
 
+        models.TextField: {'widget': TinyMCE()}
+
+    }
     search_fields = ('name', )
     inlines = [AnswerInline]
 
