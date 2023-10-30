@@ -30,11 +30,7 @@ class MCQuestionAdmin(admin.ModelAdmin):
     list_display = ('name', )
     list_filter = ('name',)
     fields = ('name', 'description')
-    formfield_overrides = {
 
-        models.TextField: {'widget': TinyMCE()}
-
-    }
     search_fields = ('name', )
     inlines = [AnswerInline]
 
