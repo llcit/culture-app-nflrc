@@ -4,6 +4,9 @@ from django.db.models import Q
 from django.contrib import admin
 from .models import *
 from tinymce.widgets import TinyMCE
+from django.urls import reverse
+from django.utils.html import format_html
+
 '''
 class TextMedia:
     js = [
@@ -58,8 +61,14 @@ class TopicAdmin(admin.ModelAdmin):
         exclude = []
 
     search_fields = ('name',)
-    list_display = ('name',)
+    list_display = ('id', 'name', 'display_learning_obj',)
     list_filter = ('name',)
+
+    def display_learning_obj(self, obj):
+        link = reverse("admin:culture_content_learningobjectives_change", args=[obj.objectives.id])
+        return format_html('<a href="{}">{}</a>', link, obj.objectives)
+    display_learning_obj.short_description = "Related Learning Objective"
+
     scenarios = forms.ModelMultipleChoiceField(queryset=Topic.objects.all(),
                                                required=True,
                                                widget=FilteredSelectMultiple(
