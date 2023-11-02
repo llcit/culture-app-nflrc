@@ -21,6 +21,7 @@ lang_choices = (
     ('U', 'Urdu'),
     ('F', 'French'),
     ('W', 'Swahili'),
+    ('Y', 'Swahili-in-Swahili'),
     ('Z', 'Chinese-in-English')
 )
 
@@ -33,14 +34,15 @@ lang_profile = (
     ('B', 'Arabic-in-Arabic'),
     ('P', 'Portuguese-in-English'),
     ('D', 'Portuguese-in-Portuguese'),
-    ('I', 'All-Arabic'),
+    ('S', 'All-Arabic'),
     ('O', 'All-Portuguese'),
-    ('S', 'All-Indonesian'),
+    ('I', 'All-Indonesian'),
     ('T', 'All-Turkish'),
     ('H', 'All-Hindi'),
     ('U', 'All-Urdu'),
     ('F', 'French'),
-    ('W', 'Swahili')
+    ('W', 'Swahili'),
+    ('Y', 'Swahili-in-Swahili'),
 )
 
 user_choices = (
@@ -189,7 +191,7 @@ class Answer(models.Model):
     rating_to = models.DecimalField(verbose_name='Rating To', max_digits=2, decimal_places=1)
 
     def get_responses(self):
-        users = User.objects.exclude(id__in=(1, 2, 3))
+        users = User.objects.all()
         responses = Response.objects.filter(answer=self, user__in=users)
         return responses
 

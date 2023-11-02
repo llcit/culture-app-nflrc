@@ -91,13 +91,13 @@ class TopicAdmin(admin.ModelAdmin):
         elif profile.language == 'C':
             return Topic.objects.filter(Q(language__in=['C', 'Z'])|Q(author=profile.user))
         elif profile.language == 'I':
-            return Topic.objects.filter(Q(language__in=['A', 'B'])|Q(author=profile.user))
+            return Topic.objects.filter(Q(language__in=['I'])|Q(author=profile.user))
         elif profile.language == 'H':
             return Topic.objects.filter(Q(language__in=['H'])|Q(author=profile.user))
         elif profile.language == 'U':
             return Topic.objects.filter(Q(language__in=['U'])|Q(author=profile.user))
         elif profile.language == 'S':
-            return Topic.objects.filter(Q(language__in=['I'])|Q(author=profile.user))
+            return Topic.objects.filter(Q(language__in=['A', 'B'])|Q(author=profile.user))
         elif profile.language == 'T':
             return Topic.objects.filter(Q(language__in=['T'])|Q(author=profile.user))
         else:
@@ -126,7 +126,7 @@ class ScenarioAdmin(admin.ModelAdmin):
             scenario_ids = [scenario.pk for topic in scenarios_topics for scenario in topic.scenarios.all()]
             return Scenario.objects.filter(id__in=scenario_ids)
         elif profile.language == 'I':
-            scenarios_topics = Topic.objects.filter(Q(language__in=['A', 'B'])|Q(author=profile.user))
+            scenarios_topics = Topic.objects.filter(Q(language__in=['I'])|Q(author=profile.user))
             scenario_ids = [scenario.pk for topic in scenarios_topics for scenario in topic.scenarios.all()]
             return Scenario.objects.filter(id__in=scenario_ids)
         elif profile.language == 'C':
@@ -146,7 +146,7 @@ class ScenarioAdmin(admin.ModelAdmin):
             scenario_ids = [scenario.pk for topic in scenarios_topics for scenario in topic.scenarios.all()]
             return Scenario.objects.filter(id__in=scenario_ids)
         elif profile.language == 'S':
-            scenarios_topics = Topic.objects.filter(Q(language__in=['I'])|Q(author=profile.user))
+            scenarios_topics = Topic.objects.filter(Q(language__in=['A', 'B'])|Q(author=profile.user))
             scenario_ids = [scenario.pk for topic in scenarios_topics for scenario in topic.scenarios.all()]
             return Scenario.objects.filter(id__in=scenario_ids)
         else:
@@ -161,11 +161,23 @@ class ProfileAdmin(admin.ModelAdmin):
         exclude = []
     search_fields = ['user__username']
 
+class LearningObjectiveAdmin(admin.ModelAdmin):
+    class Meta:
+        model = LearningObjectives
+        exclude = []
+    search_fields = ['name']
+
+    formfield_overrides = {
+
+        models.TextField: {'widget': TinyMCE()}
+
+    }
+
 
 admin.site.register(Module, ModuleAdmin)
 admin.site.register(Scenario,  ScenarioAdmin)
 admin.site.register(JudgmentTask, MCQuestionAdmin)
 admin.site.register(Topic, TopicAdmin)
 admin.site.register(Response)
-admin.site.register(LearningObjectives)
+admin.site.register(LearningObjectives, LearningObjectiveAdmin)
 admin.site.register(Profile, ProfileAdmin)

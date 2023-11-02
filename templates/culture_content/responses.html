@@ -4,7 +4,7 @@
 
 <div class="container">
 <br>
-{% if user_language in request.path or user_language == 'L'%}
+{% if user_language == 'L'%}
     <a href="{% url 'home' %}dashboard" class="waves-effect blue btn" id="desbutton" >Return to dashboard</a>
     <hr>
 {% endif %}

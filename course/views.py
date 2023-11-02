@@ -1,11 +1,9 @@
 from django.shortcuts import render
-from django.conf import settings
 from culture_content.models import *
 from culture_content.views import get_scenario_results
 from .models import Course
 from django.contrib.auth.decorators import login_required
 from .forms import SignUpForm
-from django.shortcuts import render
 import random
 import string
 from django.contrib.auth.hashers import make_password
@@ -71,7 +69,7 @@ def get_user_data(request):
 @login_required
 def get_courses(request):
 	profile = Profile.objects.get(user=request.user)
-	courses = Course.objects.exclude(participants__in=[profile])
+	courses = Course.objects.exclude(participants__in=[profile]).filter(active=True).order_by('name')
 	return render(request, 'course/courses.html', {'courses': courses})
 
 
@@ -113,7 +111,3 @@ class CourseCreate(CreateView):
 			self.object = form.save()
 			self.object.instructor.add(self.request.user)
 			return HttpResponseRedirect(self.get_success_url())
-
-
-
-
