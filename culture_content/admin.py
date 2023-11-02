@@ -6,6 +6,8 @@ from .models import *
 from tinymce.widgets import TinyMCE
 from django.urls import reverse
 from django.utils.html import format_html
+from django.urls import reverse
+from django.utils.html import format_html
 
 '''
 class TextMedia:
@@ -62,6 +64,7 @@ class TopicAdmin(admin.ModelAdmin):
 
     search_fields = ('name',)
     list_display = ('id', 'name', 'display_learning_obj',)
+    list_display_links = ('name',)
     list_filter = ('name',)
 
     def display_learning_obj(self, obj):
