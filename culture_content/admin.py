@@ -4,6 +4,11 @@ from django.db.models import Q
 from django.contrib import admin
 from .models import *
 from tinymce.widgets import TinyMCE
+from django.urls import reverse
+from django.utils.html import format_html
+from django.urls import reverse
+from django.utils.html import format_html
+
 '''
 class TextMedia:
     js = [
@@ -43,6 +48,22 @@ class ModuleAdmin(admin.ModelAdmin):
         model = Module
         exclude = []
 
+    #### Display Learning Objective in object list ####
+    search_fields = ('name',)
+    list_display_links = ('name',)
+    list_filter = ('name',)
+    list_display = ('id', 'name', 'display_learning_obj',)
+
+    def display_learning_obj(self, obj):
+        try:
+            link = reverse("admin:culture_content_learningobjectives_change", args=[obj.objectives.id])
+            return format_html('<a href="{}">{}</a>', link, obj.objectives)
+        except:
+            return 'Unspecified'
+
+    display_learning_obj.short_description = "Related Learning Objective"
+    #### END Display Learning Objective in object list ####
+
     formfield_overrides = {
 
         models.TextField: {'widget': TinyMCE()}
@@ -57,9 +78,22 @@ class TopicAdmin(admin.ModelAdmin):
         model = Topic
         exclude = []
 
+    #### Display Learning Objective in object list ####
     search_fields = ('name',)
-    list_display = ('name',)
+    list_display_links = ('name',)
     list_filter = ('name',)
+    list_display = ('id', 'name', 'display_learning_obj',)
+
+    def display_learning_obj(self, obj):
+        try:
+            link = reverse("admin:culture_content_learningobjectives_change", args=[obj.objectives.id])
+            return format_html('<a href="{}">{}</a>', link, obj.objectives)
+        except:
+            return 'Unspecified'
+
+    display_learning_obj.short_description = "Related Learning Objective"
+    #### END Display Learning Objective in object list ####
+
     scenarios = forms.ModelMultipleChoiceField(queryset=Topic.objects.all(),
                                                required=True,
                                                widget=FilteredSelectMultiple(
@@ -100,8 +134,22 @@ class ScenarioAdmin(admin.ModelAdmin):
         model = Scenario
         exclude = []
 
+    #### Display Judgement Task in object list ####
     search_fields = ('name',)
-    list_display = ('name',)
+    list_display_links = ('name',)
+    list_filter = ('name',)
+    list_display = ('id', 'name', 'display_judgement_task',)
+
+    def display_judgement_task(self, obj):
+        try:
+            link = reverse("admin:culture_content_judgmenttask_change", args=[obj.judgment_task.id])
+            return format_html('<a href="{}">{}</a>', link, obj.judgment_task)
+        except:
+            return 'Unspecified'
+
+    display_judgement_task.short_description = "Related Judgement Task"
+    #### END Display Judgement Task in object list ####
+
     formfield_overrides = {
 
         models.TextField: {'widget': TinyMCE()}
