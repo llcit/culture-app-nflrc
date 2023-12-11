@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+<br>
+<h2>Participant counts in {{ course.name }}</h2>
+
+<table id="results" class="display">
+        <thead>
+          <tr>
+              <th>Participant</th>
+              <th>Number of scenarios attempted</th>
+          </tr>
+        </thead>
+<tbody>
+{% for count in counts %}
+          <tr>
+            <td>{{ count.0 }}</td>
+            <td>{{ count.1 }}</td>
+          </tr>
+{% endfor %}
+</tbody>
+      </table>
+    <br>
+
+
+
+</div>
+{% endblock %}
+{% block js %}
+<script>
+$(document).ready( function () {
+    $('#results').DataTable();
+} );
+</script>
+{% endblock %}

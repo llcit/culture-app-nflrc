@@ -10,7 +10,7 @@ lang_choices = (
     ('L', 'All'),
     ('E', 'Russian-in-English'),
     ('B', 'Arabic-in-Arabic'),
-		('P', 'Portuguese-in-English'),
+	('P', 'Portuguese-in-English'),
     ('D', 'Portuguese-in-Portuguese'),
     ('F', 'French'),
     ('W', 'Swahili')

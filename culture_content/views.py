@@ -96,11 +96,29 @@ def get_user_responses_in_course(request, course_id):
     course = Course.objects.get(id=course_id)
     participants = Course.objects.filter(id=course_id).values_list('participants__user')
     scenarios = Topic.objects.filter(language=course.language).values('scenarios')
-    scenarios = Scenario.objects.filter (id__in=scenarios)
+    scenarios = Scenario.objects.filter(id__in=scenarios)
     for scene in scenarios:
         options_stats, scenario_stats = get_scenario_results(scene.id, users=participants)
         statistics.append ([scene, scenario_stats])
     return render (request, 'culture_content/responses_course.html',{'stats': statistics, 'course': course})
+
+#Total number of scenarios in a course attempted by user.
+@login_required
+def get_count_total_attempts_scenarios(request, course_id):
+    counts = []
+    course = Course.objects.get(id=course_id)
+    participants = Course.objects.filter(id=course_id).values_list('participants__user')
+    scenarios = Topic.objects.filter(language=course.language).values('scenarios')
+    scenarios = Scenario.objects.filter(id__in=scenarios)
+    for participant in participants:
+        scenario_count=0
+        user = User.objects.get(id=participant[0])
+        for scene in scenarios:
+            stats=get_scenario_results(scene.id, user=user)
+            if stats[1][0]>0:
+                scenario_count+=1
+        counts.append((user.username, scenario_count))
+    return render(request, 'culture_content/responses_by_participants.html',{'counts':counts, 'course':course})
 
 
 def get_scenarios_responses(topic_id, current_user):

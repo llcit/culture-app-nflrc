@@ -44,6 +44,7 @@ urlpatterns = [
     path('top/<int:top_id>/', get_topic_scenarios, name='topic-scenarios'),
     path('scenario/<int:scenario_id>/', get_scenario_detail, name='scenario'),
     path('course_results/<int:course_id>/', get_user_responses_in_course, name='responses_course'),
+    path('count_attempts/<int:course_id>/', get_count_total_attempts_scenarios, name='responses_course'),
     path('save_response/<int:answer_id>/<str:response>', save_response, name='save_response'),
     path('responses/<str:lang>/', get_user_responses, name='responses'),
     path('responses/scenario/<int:scenario_id>/', get_options_results, name='responses'),
