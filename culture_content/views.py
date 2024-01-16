@@ -121,6 +121,23 @@ def get_count_total_attempts_scenarios(request, course_id):
     return render(request, 'culture_content/responses_by_participants.html',{'counts':counts, 'course':course})
 
 
+@login_required
+def get_student_results_in_course(request, course_id):
+    results = []
+    course = Course.objects.get(id=course_id)
+    participants = Course.objects.filter(id=course_id).values_list('participants__user')
+    scenarios = Topic.objects.filter(language=course.language).values('scenarios')
+    scenarios = Scenario.objects.filter(id__in=scenarios)
+    for participant in participants:
+        user = User.objects.get(id=participant[0])
+        for scene in scenarios:
+            for judgement in scene.judgment_task.get_answers():
+                answer_responses = judgement.get_user_responses([user.id])
+                if answer_responses is not None:
+                    for res in answer_responses:
+                        results.append((user.username, scene, judgement, res))
+    return render(request, 'culture_content/student_responses_in_course.html',{'results': results, 'course':course})
+
 def get_scenarios_responses(topic_id, current_user):
     statistics = []
     scenarios = Topic.objects.filter(id=topic_id).values('scenarios')
