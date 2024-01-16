@@ -135,7 +135,7 @@ def get_student_results_in_course(request, course_id):
                 answer_responses = judgement.get_user_responses([user.id])
                 if answer_responses is not None:
                     for res in answer_responses:
-                        results.append((user.username, scene, judgement, res))
+                        results.append((user.username, scene, judgement, res, strip_tags(judgement.task)))
     return render(request, 'culture_content/student_responses_in_course.html',{'results': results, 'course':course})
 
 def get_scenarios_responses(topic_id, current_user):
