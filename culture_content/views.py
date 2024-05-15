@@ -25,17 +25,22 @@ def home(request):
     img_hi = [os.path.basename(d) for d in glob(r'/web/static/culture/assets/img/home_hi/*.jpg')]
     img_ch = [os.path.basename(d) for d in glob(r'/web/static/culture/assets/img/home_ch/*.jpg')]
     img_ch_en = [os.path.basename(d) for d in glob(r'/web/static/culture/assets/img/home_ch_en/*.jpg')]
+    img_sw = [os.path.basename(d) for d in glob(r'/web/static/culture/assets/img/home_sw/*.jpg')]
+    img_fr = [os.path.basename(d) for d in glob(r'/web/static/culture/assets/img/home_fr/*.jpg')]
     return render(request, 'culture_content/home.html', {'img_r': 'assets/img/home_ru/'+random.choice(img_r),
                                                          'img_r_en': 'assets/img/home_ru_en/'+random.choice(img_r_en),
                                                          'img_a': 'assets/img/home_ar_en/'+random.choice(img_a),
-                                                         'img_a_ar': 'assets/img/home_ar/' + random.choice(img_a_ar),'img_br_en': 'assets/img/home_br_en/'+random.choice(img_br_en),
+                                                         'img_a_ar': 'assets/img/home_ar/' + random.choice(img_a_ar),
+                                                         'img_br_en': 'assets/img/home_br_en/'+random.choice(img_br_en),
                                                          'img_br_por':'assets/img/home_br_por/' + random.choice(img_br_por),
                                                          'img_in':'assets/img/home_in/' + random.choice(img_in),
                                                          'img_ur':'assets/img/home_ur/' + random.choice(img_ur),
                                                          'img_tk':'assets/img/home_tk/' + random.choice(img_tk),
                                                          'img_hi':'assets/img/home_hi/' + random.choice(img_hi),
                                                          'img_ch':'assets/img/home_ch/' + random.choice(img_ch),
-                                                         'img_ch_en': 'assets/img/home_ch_en/' + random.choice(img_ch_en) })
+                                                         'img_ch_en': 'assets/img/home_ch_en/' + random.choice(img_ch_en),
+                                                         'img_sw': 'assets/img/home_sw/' + random.choice(img_sw),
+                                                         'img_fr': 'assets/img/home_fr/' + random.choice(img_fr)})
 
 
 @login_required
