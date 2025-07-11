@@ -6,23 +6,25 @@ from django.db.models.signals import post_save
 import random
 import datetime
 
+# Enable access to languages by uncommenting its line.
 lang_choices = (
-    ('C', 'Chinese'),
-    ('R', 'Russian'),
-    ('A', 'Arabic'),
+    # ('C', 'Chinese'),
+    # ('R', 'Russian'),
+    # ('A', 'Arabic'),
     ('L', 'All'),
     ('E', 'Russian-in-English'),
-    ('B', 'Arabic-in-Arabic'),
-    ('P', 'Portuguese-in-English'),
-    ('D', 'Portuguese-in-Portuguese'),
-    ('H', 'Hindi'),
-    ('I', 'Indonesian'),
-    ('T', 'Turkish'),
-    ('U', 'Urdu'),
-    ('F', 'French'),
-    ('W', 'Swahili'),
-    ('Y', 'Swahili-in-Swahili'),
-    ('Z', 'Chinese-in-English')
+    # ('B', 'Arabic-in-Arabic'),
+    # ('P', 'Portuguese-in-English'),
+    # ('D', 'Portuguese-in-Portuguese'),
+    # ('H', 'Hindi'),
+    # ('I', 'Indonesian'),
+    # ('T', 'Turkish'),
+    # ('U', 'Urdu'),
+    # ('F', 'French'),
+    # ('W', 'Swahili'),
+    # ('Y', 'Swahili-in-Swahili'),
+    ('Z', 'Chinese-in-English'),
+    ('X', 'Unpublished-Content') # Used to disable an entire module.
 )
 
 lang_profile = (
@@ -104,6 +106,7 @@ class Module(models.Model):
     language = models.CharField(max_length=1, choices=lang_choices, blank=False)
     image_for_topics = models.ImageField()
     author = models.ForeignKey(User, on_delete=models.CASCADE)
+    
     def __str__(self):
         return self.name+" ("+str(self.get_language_display())+")"
 

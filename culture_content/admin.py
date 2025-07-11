@@ -51,7 +51,7 @@ class ModuleAdmin(admin.ModelAdmin):
     #### Display Learning Objective in object list ####
     search_fields = ('name',)
     list_display_links = ('name',)
-    list_filter = ('name',)
+    list_filter = ('name', 'language')
     list_display = ('id', 'name', 'display_learning_obj',)
 
     def display_learning_obj(self, obj):
