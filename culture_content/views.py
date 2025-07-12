@@ -44,10 +44,10 @@ def home(request):
                                                          'img_ur':'assets/img/home_ur/' + random.choice(img_ur),
                                                          'img_tk':'assets/img/home_tk/' + random.choice(img_tk),
                                                          'img_hi':'assets/img/home_hi/' + random.choice(img_hi),
-                                                        #  'img_ch':'assets/img/home_ch/' + random.choice(img_ch),
-                                                        #  'img_ch_en': 'assets/img/home_ch_en/' + random.choice(img_ch_en),
-                                                        #  'img_sw': 'assets/img/home_sw/' + random.choice(img_sw),
-                                                        #  'img_fr': 'assets/img/home_fr/' + random.choice(img_fr)
+                                                         'img_ch':'assets/img/home_ch/' + random.choice(img_ch),
+                                                         'img_ch_en': 'assets/img/home_ch_en/' + random.choice(img_ch_en),
+                                                         'img_sw': 'assets/img/home_sw/' + random.choice(img_sw),
+                                                         'img_fr': 'assets/img/home_fr/' + random.choice(img_fr)
                                                          })
 
 
