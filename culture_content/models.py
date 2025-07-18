@@ -9,7 +9,7 @@ import datetime
 # Enable access to languages by uncommenting its line.
 lang_choices = (
     # ('C', 'Chinese'),
-    # ('R', 'Russian'),
+    ('R', 'Russian'),
     # ('A', 'Arabic'),
     ('L', 'All'),
     ('E', 'Russian-in-English'),
