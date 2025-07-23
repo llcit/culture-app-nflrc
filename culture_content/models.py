@@ -10,10 +10,10 @@ import datetime
 lang_choices = (
     # ('C', 'Chinese'),
     ('R', 'Russian'),
-    # ('A', 'Arabic'),
+    ('A', 'Arabic'),
     ('L', 'All'),
     ('E', 'Russian-in-English'),
-    # ('B', 'Arabic-in-Arabic'),
+    ('B', 'Arabic-in-Arabic'),
     # ('P', 'Portuguese-in-English'),
     # ('D', 'Portuguese-in-Portuguese'),
     # ('H', 'Hindi'),
