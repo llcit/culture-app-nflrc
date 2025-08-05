@@ -13,8 +13,28 @@ import random
 import os
 
 IMAGE_PATH = settings.IMAGE_PATH
+# Enable access to languages by uncommenting its line.
+lang_modules = (
+    # ('C', 'Chinese'),
+    # ('R', 'Russian'),
+    # ('A', 'Arabic'),
+    ('L', 'All'),
+    ('E', 'Russian-in-English'),
+    # ('B', 'Arabic-in-Arabic'),
+    # ('P', 'Portuguese-in-English'),
+    # ('D', 'Portuguese-in-Portuguese'),
+    # ('H', 'Hindi'),
+    # ('I', 'Indonesian'),
+    # ('T', 'Turkish'),
+    # ('U', 'Urdu'),
+    # ('F', 'French'),
+    # ('W', 'Swahili'),
+    # ('Y', 'Swahili-in-Swahili'),
+    # ('Z', 'Chinese-in-English'),
+    # ('X', 'Unpublished-Content') # Used to disable an entire module.
+)
 
-approved_lang_modules = [i[0] for i in lang_choices] 
+approved_lang_modules = [i[0] for i in lang_modules] 
 
 @login_required
 def home(request):
