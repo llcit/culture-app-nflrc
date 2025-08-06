@@ -38,12 +38,11 @@
         <div class="container">
             <div class="nav-wrapper">
                 <a href="{% url 'home' %}" class="navbar"><img src="{% static '/assets/img/brand/horizontal/IC Full Logo Horizontal Full Color Alt.png' %}" alt="InContext" height="60"/></a>
+                
                 <a href="{% url 'user_profile' %}"  class="button-collapse"><i class="large material-icons">person</i></a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                        <a href="{% url 'user_profile' %}" class="navlink" ><i class="large material-icons">person</i></a>
-
+                   <li style="margin-top: 15px;"><a href="{% url 'user_profile' %}" style="letter-spacing: 0px"><span style="font-size: .8em;">{{ request.user.email }}</span><i style="line-height: 20px" class="material-icons left">person</i></a></li>                    
                 </ul>
-
             </div>
         </div>
     </nav>
@@ -52,6 +51,7 @@
 {% block content %}
 {% endblock %}
 
+<span style="font-size: .8em; color: whitesmoke"></span>
 
 <!--Footer
 <footer id="contact" class="page-footer blue-grey scrollspy">
