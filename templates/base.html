@@ -34,14 +34,19 @@
 
 <!--Navigation-->
  <div class="navbar-fixed">
-    <nav id="nav_f" class="black" role="navigation">
+    <nav id="nav_f" style="background-color: #221f1f" role="navigation">
         <div class="container">
             <div class="nav-wrapper">
-                <a href="{% url 'home' %}" class="navbar"><img src="{% static '/assets/img/brand/horizontal/IC Full Logo Horizontal Full Color Alt.png' %}" alt="InContext" height="60"/></a>
-                
-                <a href="{% url 'user_profile' %}"  class="button-collapse"><i class="large material-icons">person</i></a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                   <li style="margin-top: 15px;"><a href="{% url 'user_profile' %}" style="letter-spacing: 0px"><span style="font-size: .8em;">{{ request.user.email }}</span><i style="line-height: 20px" class="material-icons left">person</i></a></li>                    
+                <a href="{% url 'home' %}" class="brand-logo left">
+                    <img src="{% static '/assets/img/brand/horizontal/IC Full Logo Horizontal Full Color Alt.png' %}" alt="InContext" height="60"/>
+                </a>                
+                <ul id="nav-mobile" class="right">
+                    <li style="margin-top: 15px;">
+                        <a href="{% url 'user_profile' %}" style="letter-spacing: 0px">
+                            <span style="font-size: .8em;">{{ request.user.email }}</span>
+                            <i style="color: #fbd1a2; line-height: 20px" class="material-icons left">person</i>
+                        </a>
+                    </li>               
                 </ul>
             </div>
         </div>
