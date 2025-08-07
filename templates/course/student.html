@@ -6,20 +6,21 @@
 
 <h1>Student Profile Page</h1>
 <hr>
+<p>Your are logged in as <b>{{request.user}}</b> with email <b>{{request.user.email}}</b></p>
 <br>
 <a href="{% url 'password_change' %}">Need to change password?</a>
-{% if courses %}
-    <h1>Your current courses</h1>
-    <a href="{% url 'courses' %}" >Find courses to enroll</a>
-    <ul class="collection">
-    {% for course in courses %}
-        <li class="collection-item">{{ course }}</li>
-    {% endfor %}
-    </ul>
+    {% if courses %}
+        <h1>Your current courses</h1>
+        <a href="{% url 'courses' %}" >Find courses to enroll</a>
+        <ul class="collection">
+        {% for course in courses %}
+            <li class="collection-item">{{ course }}</li>
+        {% endfor %}
+        </ul>
     {% else %}
-    <h4>You have not enrolled in any course yet.</h4>
-    <p>You can enroll in a course by visiting <a href="{% url 'courses' %}">this page</a></p>
-{% endif %}
+        <h4>You have not enrolled in any course yet.</h4>
+        <p>You can enroll in a course by visiting <a href="{% url 'courses' %}">this page</a></p>
+    {% endif %}
 <hr>
 <h1>Track your progress</h1>
 <h3>Scenarios</h3>
