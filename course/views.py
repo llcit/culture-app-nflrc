@@ -30,7 +30,7 @@ def request_user(request):
 								data.password = make_password(passw)
 								data.save()
 								'''send_mail(
-									'Culture app new account',
+									'InContext app new account',
 									'A request has been received to create an account with your email. The password associated with your email is: ' + data.password,
 									'llcit@hawaii.edu',
 									[email],
