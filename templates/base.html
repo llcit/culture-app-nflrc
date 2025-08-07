@@ -39,8 +39,11 @@
             <div class="nav-wrapper">
                 <a href="{% url 'home' %}" class="brand-logo left">
                     <img src="{% static '/assets/img/brand/horizontal/IC Full Logo Horizontal Full Color Alt.png' %}" alt="InContext" height="60"/>
-                </a>                
-                <ul id="nav-mobile" class="right">
+                </a>
+                <a href="{% url 'user_profile' %}" class="button-collapse right" data-activates="nav-mobile">
+                    <i style="color: #fbd1a2;" class="large material-icons">person</i>
+                </a>               
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <li>
                         <a href="{% url 'user_profile' %}">
                             <i style="color: #fbd1a2;" class="large material-icons">person</i>
