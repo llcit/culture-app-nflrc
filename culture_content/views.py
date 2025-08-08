@@ -16,7 +16,7 @@ IMAGE_PATH = settings.IMAGE_PATH
 # Enable access to languages by uncommenting its line.
 lang_modules = (
     # ('C', 'Chinese'),
-    # ('R', 'Russian'),
+    ('R', 'Russian'),
     # ('A', 'Arabic'),
     ('L', 'All'),
     ('E', 'Russian-in-English'),
