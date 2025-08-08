@@ -12,3 +12,5 @@ bin/
 include/
 pip-selfcheck.json
 .DS_Store
+culture_app_content_analysis.py
+culture_app_content_preview.py
