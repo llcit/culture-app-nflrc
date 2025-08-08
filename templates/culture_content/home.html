@@ -4,10 +4,11 @@
 
 <div class="container">
     <br>
-                <a href="{% url 'home' %}mod/L">
-                    <img src="{% static '/assets/img/Quickstart-Guide-InContext-V3.png' %}" class="responsive-img">
-                </a>
-                <!-- <a href="{% url 'home' %}mod/A">
+    <a href="{% url 'home' %}mod/L">
+        <img src="{% static '/assets/img/Quickstart-Guide-InContext-V3.png' %}" class="responsive-img">
+    </a>
+    <!-- 
+                <a href="{% url 'home' %}mod/A">
                     <img src="{% static img_a %}"  alt="Arabic" class="responsive-img">
                 </a>
                 <a href="{% url 'home' %}mod/B">
@@ -15,15 +16,16 @@
                 </a>
                 <a href="{% url 'home' %}mod/C">
                     <img src="{% static img_ch %}" alt="Chinese" class="responsive-img">
-                </a>-->
-                <!-- <a href="{% url 'home' %}mod/Z">
-                    <img src="{% static img_ch_en %}" alt="Chinese in English" class="responsive-img">
-                </a> -->
-               
-                <a href="{% url 'home' %}mod/E">
-                    <img src="{% static  img_r_en %}" alt="Russian in English" class="responsive-img">
                 </a>
-                 <!--
+                <a href="{% url 'home' %}mod/Z">
+                    <img src="{% static img_ch_en %}" alt="Chinese in English" class="responsive-img">
+                </a> 
+    -->
+
+    <a href="{% url 'home' %}mod/E">
+        <img src="{% static  img_r_en %}" alt="Russian in English" class="responsive-img">
+    </a>
+    <!--
                 <a href="{% url 'home' %}mod/R">
                     <img src="{% static  img_r %}" alt="Russian" class="responsive-img">
                 </a>
@@ -52,15 +54,15 @@
                 </a>
                <a href="{% url 'home' %}mod/F">
                     <img src="{% static  img_fr %}" alt="French" class="responsive-img">
-                </a> -->
-    <br>
-    <br>
-        <div class="center-align">
-                <img src="{% static '/assets/img/TechCenter-logo.png' %}" style="width: 50%;" class="responsive-img">
-        </div>
-
-     <img src="{% static '/assets/img/cc-license.png' %}" class="responsive-img">
-    <br>
-    <br>
+                </a> 
+    -->
+    
+    <div style="padding-top: 5em" class="center-align">
+        <p><img src="{% static '/assets/img/TechCenter-logo.png' %}" style="width: 40%;" class="responsive-img"></p>
+    </div>
+    
+    <div style="padding-top: 2.5em" class="center-align">
+        <p><img src="{% static '/assets/img/cc-license.png' %}" style="width: 96px;" class="center-align responsive-img"></p>
+    </div>
 </div>
 {% endblock %}
