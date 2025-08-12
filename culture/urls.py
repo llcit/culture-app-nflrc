@@ -33,7 +33,7 @@ urlpatterns = [
       # path('password_reset/', auth_views.password_reset, name='password_reset'),
       # path('password_reset/done/', auth_views.password_reset_done, name='password_reset_done'),
       #	path('reset/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/', auth_views.password_reset_confirm, name='password_reset_confirm'),
-    # path('request-user/', request_user, name='request-user'),
+    path('request-user/', request_user, name='request-user'),
 		path('password_reset/',auth_views.PasswordResetView.as_view(), name='admin_password_reset'),
 		path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done'),
 		path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm'),
@@ -55,6 +55,6 @@ urlpatterns = [
 	  path('enroll', enroll_course, name='enroll'),
 		path('unenroll', remove_user_from_course, name ="unenroll"),
     path('dashboard', get_profile, name='profile'),
-    path('profile', get_user_data, name='user_profile'),
+    path('profile/', get_user_data, name='user_profile'),
 		path('api/', include('config.urls'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
