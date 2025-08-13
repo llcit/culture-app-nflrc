@@ -2,71 +2,87 @@
 {% load i18n %}
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no" />
     <meta name="theme-color" content="#2196F3">
 
     <title>InContext</title>
 
     <!-- CSS  -->
 
-   <link href="{% static '/assets/min/custom-min.css' %}" type="text/css" rel="stylesheet" >
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-   <link href="{% static '/assets/css/materialize.css' %}" type="text/css" rel="stylesheet" >
-    <link href="{% static '/assets/css/nouislider.css' %}" type="text/css" rel="stylesheet" >
-    <link href="{% static '/assets/css/rangeslider.css' %}" type="text/css" rel="stylesheet" >
-    <link href="{% static '/assets/css/new_style.css' %}" type="text/css" rel="stylesheet" >
+    <link href="{% static '/assets/min/custom-min.css' %}" type="text/css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="{% static '/assets/css/materialize.css' %}" type="text/css" rel="stylesheet">
+    <link href="{% static '/assets/css/nouislider.css' %}" type="text/css" rel="stylesheet">
+    <link href="{% static '/assets/css/rangeslider.css' %}" type="text/css" rel="stylesheet">
+    <link href="{% static '/assets/css/new_style.css' %}" type="text/css" rel="stylesheet">
     <link href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" type="text/css" rel="stylesheet">
     <link rel="shortcut icon" href="{% static '/assets/img/favicon.ico' %}" type="image/x-icon">
     <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">-->
+
 </head>
+
 <body id="top" class="scrollspy">
 
-<!-- Pre Loader -->
-<div id="loader-wrapper">
-    <div id="loader"></div>
+    <!-- Pre Loader -->
+    <div id="loader-wrapper">
+        <div id="loader"></div>
 
-    <div class="loader-section section-left"></div>
-    <div class="loader-section section-right"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
 
-</div>
+    </div>
 
-<!--Navigation-->
- <div class="navbar-fixed">
-    <nav id="nav_f" style="background-color: #221f1f" role="navigation">
-        <div class="container">
-            <div class="nav-wrapper">
-                <a href="{% url 'home' %}" class="brand-logo left">
-                    <img src="{% static '/assets/img/brand/horizontal/IC Full Logo Horizontal Full Color Alt.png' %}" alt="InContext" height="60"/>
-                </a>
-                <a href="{% url 'user_profile' %}" class="button-collapse right" data-activates="nav-mobile">
-                    <i style="color: #fbd1a2;" class="large material-icons">person</i>
-                </a>               
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li>
-                        <a href="{% url 'user_profile' %}">
+    <!--Navigation-->
+    <header>
+        <div class="navbar-fixed">
+            <nav id="nav_f" style="background-color: #221f1f" role="navigation">
+                <div class="container">
+                    <div class="nav-wrapper">
+                        <a href="{% url 'home' %}" class="brand-logo left">
+                            <img src="{% static '/assets/img/brand/horizontal/IC Full Logo Horizontal Full Color Alt.png' %}"
+                                alt="InContext" height="60" />
+                        </a>
+                        <a href="{% url 'user_profile' %}" class="button-collapse right" data-activates="nav-mobile">
                             <i style="color: #fbd1a2;" class="large material-icons">person</i>
                         </a>
-                    </li>               
-                </ul>
+                        <ul id="nav-mobile" class="right hide-on-med-and-down">
+                            <li>
+                                <a href="{% url 'user_profile' %}">
+                                    <i style="color: #fbd1a2;" class="large material-icons">person</i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="footer-copyright" style="background-color: #fff;">
+        <div class="container">
+            <div class="row">
+                <div class="col l0 s12">
+                    <div class="center-align">
+                        <p><a href="https://thelanguageflagship.tech" target="_blank"><img
+                                    src="{% static '/assets/img/TechCenter-logo.png' %}" style="width: 15em;"
+                                    class="responsive-img"></a></p>
+                    </div>
+                    <div class="center-align">
+                        <p><img src="{% static '/assets/img/cc-license.png' %}" style="width: 7em;"
+                                class="center-align responsive-img"></p>
+                    </div>
+                </div>
             </div>
         </div>
-    </nav>
-</div>
-
-{% block content %}
-{% endblock %}
-
-<!--Footer
-<footer id="contact" class="page-footer blue-grey scrollspy">
-    <div class="footer-copyright blue">
-        <div class="container">
-            Made by The Tech Center
-        </div>
-
-</footer>-->
-
+    </footer>
 
     <!--  Scripts-->
     <script src="{% static '/assets/js/jquery-3.3.1.min.js' %}"></script>
@@ -77,8 +93,8 @@
     <script src="{% static '/assets/js/create_slider.js' %}"></script>
     <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 
-
     {% block js %}
     {% endblock %}
-    </body>
+</body>
+
 </html>
