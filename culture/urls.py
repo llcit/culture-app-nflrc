@@ -40,6 +40,7 @@ urlpatterns = [
 		path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete'),
     path('admin/', admin.site.urls),
     path('', home, name="home"),
+    path('review', staff_review, name="staff-review"),
     path('mod/<str:lang>/', get_modules, name='modules'),
     path('top/<int:top_id>/', get_topic_scenarios, name='topic-scenarios'),
     path('scenario/<int:scenario_id>/', get_scenario_detail, name='scenario'),

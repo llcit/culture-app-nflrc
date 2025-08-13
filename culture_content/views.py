@@ -73,7 +73,7 @@ def home(request):
 
 @login_required
 def get_modules(request, lang):
-    if lang not in approved_lang_modules:
+    if lang not in approved_lang_modules and request.user.is_staff==False:
         raise Http404("Page not found")
     else:
         modules = Module.objects.filter(language=lang).order_by('module_number')
@@ -84,7 +84,7 @@ def get_modules(request, lang):
 def get_topic_scenarios(request, top_id):
     topic = get_object_or_404(Topic, pk=top_id)
     module = Module.objects.get(topics__in=[top_id])
-    if module.language not in approved_lang_modules:
+    if module.language not in approved_lang_modules and request.user.is_staff==False:
         raise Http404("Page not found")
     scenario_results = get_scenarios_responses(top_id, request.user)
     return render(request, 'culture_content/topics.html', {'topic': topic, 'module': module, 'scenario_results': scenario_results})
@@ -95,7 +95,7 @@ def get_scenario_detail(request, scenario_id):
     scenario = get_object_or_404(Scenario, pk=scenario_id)
     topic = get_object_or_404(Topic, scenarios__in=[scenario_id]) # when a scenario is unattached (made unavailable) from a topic, this forces the 404.
     module = Module.objects.get(topics__in=[topic.id])
-    if module.language not in approved_lang_modules:
+    if module.language not in approved_lang_modules and request.user.is_staff==False:
         raise Http404("Page not found")
     return render(request, 'culture_content/scenario.html', {'scenario': scenario, 'topic':topic, 'module':module})
 
@@ -248,4 +248,38 @@ def get_profile(request):
 
 
 
-
+@login_required
+def staff_review(request):
+    if not request.user.is_staff:
+        raise Http404("Page not found")
+    img_r =[os.path.basename(r) for r in glob(IMAGE_PATH + r'/assets/img/home_ru/*.jpg')]
+    img_r_en = [os.path.basename(r) for r in glob(IMAGE_PATH + r'/assets/img/home_ru_en/*.jpg')]
+    img_a = [os.path.basename(d) for d in glob(IMAGE_PATH + r'/assets/img/home_ar_en/*.jpg')]
+    img_a_ar = [os.path.basename(d) for d in glob(IMAGE_PATH + r'/assets/img/home_ar/*.jpg')]
+    img_br_en = [os.path.basename(d) for d in glob(IMAGE_PATH + r'/assets/img/home_br_en/*.jpg')]
+    img_br_por = [os.path.basename(d) for d in glob(IMAGE_PATH + r'/assets/img/home_br_por/*.jpg')]
+    img_in = [os.path.basename(d) for d in glob(IMAGE_PATH + r'/assets/img/home_in/*.jpg')]
+    img_ur = [os.path.basename(d) for d in glob(IMAGE_PATH + r'/assets/img/home_ur/*.jpg')]
+    img_tk = [os.path.basename(d) for d in glob(IMAGE_PATH + r'/assets/img/home_tk/*.jpg')]
+    img_hi = [os.path.basename(d) for d in glob(IMAGE_PATH + r'/assets/img/home_hi/*.jpg')]
+    img_ch = [os.path.basename(d) for d in glob(IMAGE_PATH + r'/assets/img/home_ch/*.jpg')]
+    img_ch_en = [os.path.basename(d) for d in glob(IMAGE_PATH + r'/assets/img/home_ch_en/*.jpg')]
+    img_sw = [os.path.basename(d) for d in glob(IMAGE_PATH + r'/assets/img/home_sw/*.jpg')]
+    img_fr = [os.path.basename(d) for d in glob(IMAGE_PATH + r'/assets/img/home_fr/*.jpg')]
+    # the last four languages do not have images in the repository. Commented out to run locally.
+    return render(request, 'culture_content/home_review.html', {
+                                                         'img_r': 'assets/img/home_ru/'+random.choice(img_r),
+                                                         'img_r_en': 'assets/img/home_ru_en/'+random.choice(img_r_en),
+                                                         'img_a': 'assets/img/home_ar_en/'+random.choice(img_a),
+                                                         'img_a_ar': 'assets/img/home_ar/' + random.choice(img_a_ar),
+                                                         'img_br_en': 'assets/img/home_br_en/'+random.choice(img_br_en),
+                                                         'img_br_por':'assets/img/home_br_por/' + random.choice(img_br_por),
+                                                         'img_in':'assets/img/home_in/' + random.choice(img_in),
+                                                         'img_ur':'assets/img/home_ur/' + random.choice(img_ur),
+                                                         'img_tk':'assets/img/home_tk/' + random.choice(img_tk),
+                                                         'img_hi':'assets/img/home_hi/' + random.choice(img_hi),
+                                                         'img_ch':'assets/img/home_ch/' + random.choice(img_ch),
+                                                         'img_ch_en': 'assets/img/home_ch_en/' + random.choice(img_ch_en),
+                                                         'img_sw': 'assets/img/home_sw/' + random.choice(img_sw),
+                                                         'img_fr': 'assets/img/home_fr/' + random.choice(img_fr)
+                                                         })
