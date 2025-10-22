@@ -41,25 +41,30 @@
 
             {% for obj in modules %}
 
-                    <h1>{{ obj.name }}</h1>
-                    <div id="blurb">
-                        <p>{{ obj.blurb|safe }}</p>
-                    </div>
-                    <a data-downbtn="{{ obj.id}}" class="blue btn">More</a>
-                    <a data-upbtn="{{ obj.id}}" class="blue btn">Less</a>
-                    <div data-hidden="{{ obj.id}}">
-                            <p>{{ obj.introduction|safe }}</p>
-                            {% if obj.objectives %}
-                                <!-- <h3 id="show">Learning Objectives</h3> -->
-                                <!-- <p>{{ obj.objectives.objectives| safe }}</p> -->
-                            {% endif %}
-                            <h3>{{ obj.name }} Topics </h3>
-
-
-                                {% for top in obj.topics.all|dictsort:"order" %}
-                                    <p><strong><a href="{% url 'home' %}top/{{ top.pk }}">{{ top.name }}</a></strong></p>
-                                {% endfor %}
-
+                        <div class ="card custom-card-color" id="{{ obj.name}}">
+                            <div class="card-section">
+                                <a data-blurbshort="{{ obj.id}}">
+                                    <span class="custom-card-title-1">{{ obj.name }}</span>
+                                    {{ obj.blurb|safe|truncatewords_html:15 }}
+                                    <p class="more-less">More</p>
+                                </a>
+                                <a data-blurbfull="{{ obj.id}}">
+                                    <span class="custom-card-title-1">{{ obj.name }}</span>
+                                    {{ obj.blurb|safe }}
+                                    <p class="more-less">Less</p>
+                                </a>
+                            </div>
+                            <div class="card-section">
+                                <a data-topicsshort="{{ obj.id}}">
+                                    <i class="material-icons">keyboard_arrow_right</i><span class="custom-card-title-2">Topics</span>
+                                </a>
+                                <a data-topicsfull="{{ obj.id}}">
+                                    <i class="material-icons">keyboard_arrow_down</i><span class="custom-card-title-2">Topics</span><p/>
+                                    {% for top in obj.topics.all|dictsort:"order" %}
+                                        <a href="{% url 'home' %}top/{{ top.pk }}" class="button button-title" data-topicsfull="{{ obj.id}}">{{ top.name }}</a><p/>
+                                    {% endfor %}
+                                </a>
+                            </div>
                         </div>
 
                 {% endfor %}
@@ -70,20 +75,32 @@
 {% block js %}
     <script>
     $(document).ready(function() {
-        $('[data-hidden]*').hide();
-        $('[data-upbtn]*').hide();
-        $('[data-downbtn]').click(function(){
-            var id = $(this).attr('data-downbtn');
+        $('[data-blurbfull]*').hide();
+        $('[data-topicsfull]*').hide();
+        $('[data-blurbshort]').click(function(){
+            var id = $(this).attr('data-blurbshort');
             $(this).hide();
-            $('[data-upbtn='+id+']').show();
-            $('[data-hidden='+id+']').show();
+            $('[data-blurbfull='+id+']').show();
+            $('[data-topicsshort='+id+']').hide();
+            $('[data-topicsfull='+id+']').show();
     });
-        $('[data-upbtn]').click(function(){
-            var id = $(this).attr('data-upbtn');
+    $('[data-blurbfull]').click(function(){
+        var id = $(this).attr('data-blurbfull');
+        $(this).hide();
+        $('[data-blurbshort='+id+']').show();
+        $('[data-topicsshort='+id+']').show();
+        $('[data-topicsfull='+id+']').hide();
+    });
+    $('[data-topicsshort]').click(function(){
+            var id = $(this).attr('data-topicsshort');
             $(this).hide();
-            $('[data-downbtn='+id+']').show();
-            $('[data-hidden='+id+']').hide();
-            });
-        })
+            $('[data-topicsfull='+id+']').show();
+    });
+    $('[data-topicsfull]').click(function(){
+        var id = $(this).attr('data-topicsfull');
+        $('[data-topicsfull='+id+']').hide();
+        $('[data-topicsshort='+id+']').show();
+    })
+    })
     </script>
 {% endblock %}

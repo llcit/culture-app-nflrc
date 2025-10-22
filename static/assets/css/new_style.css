@@ -1,55 +1,57 @@
 
 @import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300');
 @import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 body {
 		font-size: 100%;
 	}
 
 	.title {
-    font-family : Roboto, Arial, "sans-serif";
+    font-family : 'Montserrat', Arial, "sans-serif";
     font-weight : 900;
     /*font-size: 250%;*/
     color : #FFFFFF;
 }
 	h1 {
-    font-family : Open Sans Condensed, Arial, "sans-serif";
-    font-weight : 900;
-    font-size: 180%;
+    font-family : 'Montserrat', Arial, "sans-serif";
+    font-weight : 500;
+    font-size: 32pt;
     color : rgba(29,28,28,1.00);
 	line-height: 1;
 
 }
 
 	h2 {
-    font-family : Open Sans Condensed, Arial, "sans-serif";
-    font-weight : 900;
-    font-size: 140%;
-    color : rgba(29,28,28,1.00);
+    font-family : 'Montserrat', Arial, "sans-serif";
+    font-weight : 500;
+    font-size: 26pt;
+    color : #221f1f;
 	line-height: 1;
 }
 
 
 	h3 {
-    font-family : Open Sans Condensed, Arial, "sans-serif";
-    font-weight : 900;
-    font-size: 120%;
-    color : rgba(29,28,28,1.00);
+    font-family : 'Montserrat', Arial, "sans-serif";
+    font-weight : 500;
+    font-size: 20pt;
+    color : #221f1f;
 	line-height: 1;
 }
 
 	h4 {
-    font-family : Open Sans Condensed, Arial, "sans-serif";
+    font-family : 'Montserrat', Arial, "sans-serif";
     font-weight : 200;
     font-size: 110%;
-    color : rgba(29,28,28,1.00);
+    color : #221f1f;
 	line-height: 1;
 }
 
 	p, ol, ul {
-    font-family : Roboto, Arial, "sans-serif";
-    font-weight : 100;
-    font-size: 90%;
-    color : rgba(46,46,46,1.00);
+    font-family: 'Roboto', Arial, "sans-serif";
+    font-weight : 200;
+    font-size: 16pt;
+    color : #221f1f;
 	line-height: 1.4;
 }
 	/*a:link {
@@ -88,14 +90,14 @@ body {
     color : rgba(3,155,229,1.00);
 }
 
-	.button {
-  	background-color: rgba(3,155,229,1.00);
+	a.button {
+  	background-color:#309ece;
   	border: none;
-  	color:ghostwhite;
-	font-family : Roboto, Arial, "sans-serif";
-  	font-weight : 900;
-	font-size: 100%;
-  	padding: 8px 10px;
+  	color:#FFFFFF;
+	font-family : 'Montserrat', Arial, "sans-serif";
+  	font-weight : 500;
+	font-size: 20pt;
+  	padding: 4px 5px;
   	text-align: center;
   	text-decoration: none;
   	display: inline-block;
@@ -104,7 +106,7 @@ body {
 }
 
 	.button:hover {
-  background-color: rgba(28,126,189,1.00);
+  background-color: #309ece;
   color: white;
 }
 
@@ -116,4 +118,80 @@ body {
 	.button {
   -webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
+}
+
+div.card-section {
+	border-top: 1px solid rgba(160, 160, 160, 0.2);
+    padding: 20px; 
+    border-radius: 0 0 2px 2px;
+}
+
+div.custom-card-color {
+	background-color:#f7f7f7
+}
+
+span.custom-card-title-1 {
+	color: #221f1f;
+	font-size: 32pt;
+	font-family: 'Montserrat', Arial, "sans-serif";
+	font-weight: 500;
+}
+
+span.custom-card-title-2 {
+	color: #221f1f;
+	font-size:26pt;
+	font-family: 'Montserrat', Arial, "sans-serif";
+	font-weight: 500;
+	text-align:center;
+}
+
+span.custom-card-title-3 {
+	color: #221f1f;
+	font-size:20pt;
+	font-family: 'Montserrat', Arial, "sans-serif";
+	font-weight: 500;
+}
+
+div.custom-card-title-3 {
+	color: #221f1f;
+	font-size:20pt;
+	font-family: 'Montserrat', Arial, "sans-serif";
+	font-weight: 500;
+}
+
+a.button-title {
+	background-color:#309ece;
+  	border: none;
+  	color:#FFFFFF;
+	font-family : 'Montserrat', Arial, "sans-serif";
+	font-size:20pt;
+}
+
+p.more-less {
+	color: #309ece;
+	font-size:15pt;
+	font-weight:500;
+	text-align:right;
+}
+
+div.situation-grid {
+	display: grid;
+    grid-template-columns: 3fr 1fr;
+	grid-template-rows: 2fr;
+	align-items:center;
+	padding-top:2%;
+	padding-left:5%;
+	padding-bottom:5%;
+}
+
+.custom-green-chip {
+	background-color: #1c7c54;
+	color:#FFFFFF;
+	font-size: 26pt;
+}
+
+.custom-red-chip {
+	background-color: #d62246;
+	color:#FFFFFF;
+	font-size: 26pt;
 }
