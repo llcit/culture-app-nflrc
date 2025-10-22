@@ -97,12 +97,11 @@ body {
 	font-family : 'Montserrat', Arial, "sans-serif";
   	font-weight : 500;
 	font-size: 20pt;
-  	padding: 4px 5px;
+  	padding: 4px 30px 4px 30px;
   	text-align: center;
   	text-decoration: none;
   	display: inline-block;
 	border-radius: 2px;
-	box-shadow: 0 5px 10px 0 rgba(0,0,0,0.2), 0 5px 10px 0 rgba(0,0,0,0.19)
 }
 
 	.button:hover {
@@ -188,10 +187,14 @@ div.situation-grid {
 	background-color: #1c7c54;
 	color:#FFFFFF;
 	font-size: 26pt;
+	width: 50%;
+	text-align:center;
 }
 
 .custom-red-chip {
 	background-color: #d62246;
 	color:#FFFFFF;
 	font-size: 26pt;
+	width: 50%;
+	text-align:center;
 }
