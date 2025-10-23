@@ -1,50 +1,15 @@
 from django.db import models
+from django.conf import settings
 from six import python_2_unicode_compatible
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from django.db.models.signals import post_save
+from django.urls import reverse
 import random
 import datetime
 
-lang_choices = (
-    ('C', 'Chinese'),
-    ('R', 'Russian'),
-    ('A', 'Arabic'),
-    ('L', 'All'),
-    ('E', 'Russian-in-English'),
-    ('B', 'Arabic-in-Arabic'),
-    ('P', 'Portuguese-in-English'),
-    ('D', 'Portuguese-in-Portuguese'),
-    ('H', 'Hindi'),
-    ('I', 'Indonesian'),
-    ('T', 'Turkish'),
-    ('U', 'Urdu'),
-    ('F', 'French'),
-    ('W', 'Swahili'),
-    ('Y', 'Swahili-in-Swahili'),
-    ('Z', 'Chinese-in-English'),
-    ('X', 'Unpublished-Content') # Used to disable an entire module.
-)
-
-lang_profile = (
-    ('C', 'All-Chinese'),
-    ('R', 'Russian'),
-    ('A', 'Arabic'),
-    ('L', 'All'),
-    ('E', 'Russian-in-English'),
-    ('B', 'Arabic-in-Arabic'),
-    ('P', 'Portuguese-in-English'),
-    ('D', 'Portuguese-in-Portuguese'),
-    ('S', 'All-Arabic'),
-    ('O', 'All-Portuguese'),
-    ('I', 'All-Indonesian'),
-    ('T', 'All-Turkish'),
-    ('H', 'All-Hindi'),
-    ('U', 'All-Urdu'),
-    ('F', 'French'),
-    ('W', 'Swahili'),
-    ('Y', 'Swahili-in-Swahili'),
-)
+lang_choices = settings.LANGUAGE_CHOICES
+lang_profile = settings.LANGUAGE_PROFILES
 
 user_choices = (
     ('I', 'Instructor'),
@@ -103,9 +68,13 @@ class Module(models.Model):
     objectives = models.ForeignKey('LearningObjectives', on_delete=models.CASCADE, blank=True, null=True)
     topics = models.ManyToManyField('Topic')
     language = models.CharField(max_length=1, choices=lang_choices, blank=False)
-    image_for_topics = models.ImageField()
+    image_for_topics = models.ImageField() # Image to be shown on the Topics page.  
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     
+    def get_absolute_url(self):
+        # ensure the name matches your urls.py entry (see example below)
+        return reverse('modules', args=[self.language])
+
     def __str__(self):
         return self.name+" ("+str(self.get_language_display())+")"
 
