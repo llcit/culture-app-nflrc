@@ -23,7 +23,6 @@ lang_img_paths = {
 
 @login_required
 def home(request):
-    print(lang_img_paths)
     language_list = []
     for lang, data in settings.LANGUAGE_DATA.items():
         if data['status'] == 'active':
