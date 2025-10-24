@@ -5,12 +5,8 @@
 <div class="container">
     <br>
     {% for i in languages %}
-        <a href="{% url 'modules' i.url %}">
-            {% if i.url == 'L' %}
-                <img src="{% static 'media/home_all/Quickstart-Guide-InContext-V3.jpg' %}"  alt="Quickstart Guide" class="responsive-img">
-            {% else %}
-                <img src="{% static 'media/' %}{{i.image_url}}"  alt="{{i.lang_name}}" class="responsive-img">
-            {% endif %}            
+        <a href="{% url 'modules' i.url %}">  
+            <img src="{% static 'media/' %}{{i.image_url}}"  alt="{{i.lang_name}}" class="responsive-img">
         </a>
     {% endfor %}
 </div>
