@@ -1,75 +1,38 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-    <div class="section scrollspy">
-
+<div class="section scrollspy">
     <div class="container">
-
- {% if  '/A/' in request.path   %}
-         <img src="{% static '/assets/img/morocco-2349647-optimized.jpg' %}"  class="responsive-img">
-    {% elif '/C/' in request.path %}
-
-         <img src="{% static '/assets/img/04-beijin02-optimized.jpg' %}"  class="responsive-img">
-
-    {% elif '/R/' in request.path %}
-         <img src="{% static '/assets/img/almaty-91219-optimized.jpg' %}"  class="responsive-img">
-     {% elif '/E/' in request.path %}
-         <img src="{% static '/assets/img/home_ru_en/05-russian-astana-02-optimized-en.jpg' %}"  class="responsive-img">
-     {% elif '/L/' in request.path %}
-         <img src="{% static '/assets/img/Quickstart-Guide-InContext-V1.png' %}"  class="responsive-img">
-    {% elif '/B/' in request.path %}
-         <img src="{% static '/assets/img/home_ar/04-morocco-optimized.jpg' %}"  class="responsive-img">
-     {% elif '/P/' in request.path %}
-         <img src="{% static '/assets/img/home_br_en/02-por-home-optimized.jpg' %}"  class="responsive-img">
-     {% elif '/D/' in request.path %}
-         <img src="{% static '/assets/img/home_br_por/02-por-home-optimized-por.jpg' %}"  class="responsive-img">
-     {% elif '/I/' in request.path %}
-         <img src="{% static '/assets/img/home_wisconsin/Indonesian.jpg' %}"  class="responsive-img">
-    {% elif '/T/' in request.path %}
-         <img src="{% static '/assets/img/home_wisconsin/Turkish.jpg' %}"  class="responsive-img">
-    {% elif '/U/' in request.path %}
-         <img src="{% static '/assets/img/home_wisconsin/Urdu.jpg' %}"  class="responsive-img">
-         {% elif '/H/' in request.path %}
-         <img src="{% static '/assets/img/home_wisconsin/Hindi.jpg' %}"  class="responsive-img">
-        {% elif '/F/' in request.path %}
-         <img src="{% static '/assets/img/home_fr/04-senegal-optimized-fr.jpg' %}"  class="responsive-img">
-        {% elif '/W/' in request.path %}
-         <img src="{% static '/assets/img/home_sw/01-africa-optimized-en.jpg' %}"  class="responsive-img">
-        {% elif '/Z/' in request.path %}
-         <img src="{% static '/assets/img/home_ch_en/01-taiwan-optimized-en.jpg' %}"  class="responsive-img">
-    {% endif %}
-
-            {% for obj in modules %}
-
-                        <div class ="card custom-card-color" id="{{ obj.name}}">
-                            <div class="card-section">
-                                <a data-blurbshort="{{ obj.id}}">
-                                    <span class="custom-card-title-1">{{ obj.name }}</span>
-                                    {{ obj.blurb|safe|truncatewords_html:15 }}
-                                    <p class="more-less">More</p>
-                                </a>
-                                <a data-blurbfull="{{ obj.id}}">
-                                    <span class="custom-card-title-1">{{ obj.name }}</span>
-                                    {{ obj.blurb|safe }}
-                                    <p class="more-less">Less</p>
-                                </a>
-                            </div>
-                            <div class="card-section">
-                                <a data-topicsshort="{{ obj.id}}">
-                                    <i class="material-icons">keyboard_arrow_right</i><span class="custom-card-title-2">Topics</span>
-                                </a>
-                                <a data-topicsfull="{{ obj.id}}">
-                                    <i class="material-icons">keyboard_arrow_down</i><span class="custom-card-title-2">Topics</span><p/>
-                                    {% for top in obj.topics.all|dictsort:"order" %}
-                                        <a href="{% url 'home' %}top/{{ top.pk }}" class="button button-title" data-topicsfull="{{ obj.id}}">{{ top.name }}</a><p/>
-                                    {% endfor %}
-                                </a>
-                            </div>
-                        </div>
-
-                {% endfor %}
-                    </div>
+        <img src="{% static 'media/' %}{{img_url}}"  class="responsive-img">
+        {% for obj in modules %}
+        <div class ="card custom-card-color" id="{{ obj.name}}">
+            <div class="card-section">
+                <a data-blurbshort="{{ obj.id}}">
+                    <span class="custom-card-title-1">{{ obj.name }}</span>
+                    {{ obj.blurb|safe|truncatewords_html:15 }}
+                    <p class="more-less">More</p>
+                </a>
+                <a data-blurbfull="{{ obj.id}}">
+                    <span class="custom-card-title-1">{{ obj.name }}</span>
+                    {{ obj.blurb|safe }}
+                    <p class="more-less">Less</p>
+                </a>
             </div>
+            <div class="card-section">
+                <a data-topicsshort="{{ obj.id}}">
+                    <i class="material-icons">keyboard_arrow_right</i><span class="custom-card-title-2">Topics</span>
+                </a>
+                <a data-topicsfull="{{ obj.id}}">
+                    <i class="material-icons">keyboard_arrow_down</i><span class="custom-card-title-2">Topics</span><p/>
+                    {% for top in obj.topics.all|dictsort:"order" %}
+                        <a href="{% url 'home' %}top/{{ top.pk }}" class="button button-title" data-topicsfull="{{ obj.id}}">{{ top.name }}</a><p/>
+                    {% endfor %}
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
 
 {% endblock %}
 {% block js %}

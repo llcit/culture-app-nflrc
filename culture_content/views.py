@@ -15,14 +15,19 @@ import os
 IMAGE_PATH = settings.IMAGE_PATH
 approved_lang_modules = [v['code'] for k, v in settings.LANGUAGE_DATA.items() if v['status'] == 'active']
 
+# Assemble list of possible images for each language.
+lang_img_paths = {
+    lang: [data['img_home'] + '/' + os.path.basename(r) for r in glob(IMAGE_PATH + r'/' + data['img_home'] + r'/*.jpg')]
+    for lang, data in settings.LANGUAGE_DATA.items()
+}    
+
 @login_required
 def home(request):
-    # Assemble displayable languages and auto generate images for each.
+    print(lang_img_paths)
     language_list = []
     for lang, data in settings.LANGUAGE_DATA.items():
         if data['status'] == 'active':
-            p = [os.path.basename(r) for r in glob(IMAGE_PATH + r'/assets/img/' + data['img_home'] + r'/*.jpg')]
-            p = 'assets/img/' + data['img_home'] + '/' + random.choice(p)
+            p = random.choice(lang_img_paths[lang])
             language_list.append({'url': lang, 'image_url': p, 'lang_name': data['display']})
  
     template_context = {'languages': language_list}
@@ -35,12 +40,11 @@ def staff_review(request):
     language_list = []
     for lang, data in settings.LANGUAGE_DATA.items():
         if data['status'] == 'pending' or data['status'] == 'active':
-            p = [os.path.basename(r) for r in glob(IMAGE_PATH + r'/assets/img/' + data['img_home'] + r'/*.jpg')]
-            p = 'assets/img/' + data['img_home'] + '/' + random.choice(p)
+            p = random.choice(lang_img_paths[lang])
             language_list.append({'url': lang, 'image_url': p, 'lang_name': data['display']})
  
     template_context = {'languages': language_list}
-    return render(request, 'culture_content/home.html', template_context)
+    return render(request, 'culture_content/home_review.html', template_context)
 
 
 @login_required
@@ -48,8 +52,9 @@ def get_modules(request, lang):
     if lang not in approved_lang_modules and request.user.is_staff==False:
         raise Http404("Page not found")
     else:
+        p = random.choice(lang_img_paths[lang])
         modules = Module.objects.filter(language=lang).order_by('module_number')
-    return render(request, 'culture_content/modules.html', {'modules': modules})
+    return render(request, 'culture_content/modules.html', {'modules': modules, 'img_url': p})
 
 
 @login_required
