@@ -5,11 +5,11 @@
     <div class="container">
         <img src="{% static 'media/' %}{{img_url}}"  class="responsive-img">
         {% for obj in modules %}
-        <div class ="card custom-card-color" id="{{ obj.name}}">
+        <div class ="card custom-card-color custom-scroll-margin" id="{{ obj.name}}">
             <div class="card-section">
                 <a data-blurbshort="{{ obj.id}}">
                     <span class="custom-card-title-1">{{ obj.name }}</span>
-                    {{ obj.blurb|safe|truncatewords_html:15 }}
+                    {{ obj.blurb|safe|truncatewords_html:40 }}
                     <p class="more-less">More</p>
                 </a>
                 <a data-blurbfull="{{ obj.id}}">
