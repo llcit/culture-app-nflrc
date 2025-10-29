@@ -1,7 +1,8 @@
 function create_slider(item){
            var  class1 = 'slider-experts-' + item[0];
            var class2 = 'slider-results-' + item[2];
-            $('#results').append('<div class="row valign-wrapper">\n' +
+            $('#results').append('<div class="card custom-card-color">\n' +
+                                    '<div class="row valign-wrapper">\n' +
                 '                        <div class="col s5"><strong>Option</strong>\n' +
                 '                                 <p>' + item[4] + '</p></div>\n' +
                 '                        <div class="col s5"><strong>Explanation</strong>\n' +
@@ -19,7 +20,8 @@ function create_slider(item){
                 '                         <div class="col s8">\n' +
                 '                                <div class="' + class2 + '"></div>\n' +
                 '                        </div>\n' +
-                '                    </div></br><hr></br>');
+                '                    </div>\n' +
+                '                  </div>');
             $('.' + class1).attr('id', item[0]);
             $('.' + class2).attr('id', item[2]);
             var s1 = document.getElementById(item[0]);

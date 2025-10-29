@@ -13,29 +13,12 @@
     </p> -->
     
     <div class="nav-wrapper">
-    
-        {% if module.language == 'E'%}
-            <a href="{% url 'home' %}mod/{{ module.language }}/" style="color:#221f1f;font-size:12pt;font-style:'Roboto',Arial,'sans-serif';">Russian <i class="material-icons">keyboard_arrow_right</i></a>
-        {% elif module.language == 'A' %}
-            <a href="{% url 'home' %}mod/{{ module.language }}/" style="color:#221f1f;font-size:12pt;font-style:'Roboto',Arial,'sans-serif';">Arabic <i class="material-icons">keyboard_arrow_right</i></a>
-        {% elif module.language == 'Z' %}
-            <a href="{% url 'home' %}mod/{{ module.language }}/" style="color:#221f1f;font-size:12pt;font-style:'Roboto',Arial,'sans-serif';">Chinese <i class="material-icons">keyboard_arrow_right</i></a>
-        {% elif module.language == 'R'%}
-            <a href="{% url 'home' %}mod/{{ module.language }}/" style="color:#221f1f;font-size:12pt;font-style:'Roboto',Arial,'sans-serif';">Русский <i class="material-icons">keyboard_arrow_right</i></a>
-        {% elif module.language == 'C'%}
-            <a href="{% url 'home' %}mod/{{ module.language }}/" style="color:#221f1f;font-size:12pt;font-style:'Roboto',Arial,'sans-serif';">中文 <i class="material-icons">keyboard_arrow_right</i></a>
-        {% elif module.language == 'B'%}
-            <a href="{% url 'home' %}mod/{{ module.language }}/" style="color:#221f1f;font-size:12pt;font-style:'Roboto',Arial,'sans-serif';">العربية <i class="material-icons">keyboard_arrow_left</i></a>
-        {%endif%}
-        {% if module.language == 'B'%}
-            <a href="{% url 'home' %}mod/{{ module.language }}#{{module.name}}" style="color:#221f1f;font-size:12pt;font-style:'Roboto',Arial,'sans-serif';">{{module.name}} <i class="material-icons">keyboard_arrow_left</i></a>
-        {%else %}
-            <a href="{% url 'home' %}mod/{{ module.language }}#{{module.name}}" style="color:#221f1f;font-size:12pt;font-style:'Roboto',Arial,'sans-serif';">{{module.name}} <i class="material-icons">keyboard_arrow_right</i></a>
-        {% endif %}
-        
-        <a href="#!" style="color:#309ece;font-size:12pt;font-style:'Roboto',Arial,'sans-serif';">{{topic.name}}</a>
+        <a href="{% url 'home' %}mod/{{ module.language }}/" style="">{{ lang_display }} <strong> &gt; </strong></a>
+        <a href="{% url 'home' %}mod/{{ module.language }}#{{module.name}}" style="">{{module.name}} <strong> &gt; </strong></a>      
+        <span style="">{{topic.name}}<span>
     </div>
-                    <span class="custom-card-title-1">{{ topic.name }}</span>
+    <br><br>
+                    <span class="custom-card-title-1 custom-title-padding">{{ topic.name }}</span>
                     {% if topic.activation %}
                         <p>{{ topic.activation|safe }}</p>
                     {% endif %}
@@ -46,12 +29,12 @@
                     <!-- <h3>Learning Objectives</h3> -->
                         <!-- <p>{{ topic.objectives.objectives|safe }}</p> -->
                     {% endif %}
-                    <span class="custom-card-title-2">Situations</span>
+                    <span class="custom-card-title-2 custom-title-padding">Situations</span>
 
                     
                     {% for scenario in scenario_results %}
                         <div class="card custom-card-color situation-grid">
-                        <div class="situation-grid-child custom-card-title-3">{{ scenario.0 }}</div>
+                        <div class="situation-grid-child custom-card-title-3 situation-title-margin">{{ scenario.0 }}</div>
                         <div class="situation-grid-child"><p>Attempts</p></div>
                         <div class="situation-grid-child"><a class="button button-title" href="{% url 'home' %}scenario/{{ scenario.0.pk }} ">Begin</a></div>
                         <div class="situation-grid-child"> {% if scenario.1.0 == 0 %}
