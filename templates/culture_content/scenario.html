@@ -5,7 +5,9 @@
     <div class="container">
        <img src='/static/culture/media/{{ module.image_for_topics }}' class="responsive-img">
         <p>
-            <a href="{% url 'home' %}mod/{{ module.language }}/">{{ module.name }}</a><strong> > </strong><a href="{% url 'home' %}top/{{ topic.id }}">{{ topic.name }}</a>
+            <a href="{% url 'home' %}mod/{{ module.language }}/">{{ lang_display }} <strong> > </strong> </a>
+            <a href="{% url 'home' %}mod/{{ module.language }}#{{ module.name }}">{{ module.name }} <strong> > </strong> </a> 
+            <a href="{% url 'home' %}top/{{ topic.id }}">{{ topic.name }}</a>
         </p>
         <h1 style="font-family: Roboto, Arial">{{ scenario.name }}</h1>
         <a class="waves-effect blue btn" id="desbutton">Situation</a>

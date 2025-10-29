@@ -62,8 +62,9 @@ def get_topic_scenarios(request, top_id):
     module = Module.objects.get(topics__in=[top_id])
     if module.language not in approved_lang_modules and request.user.is_staff==False:
         raise Http404("Page not found")
+    lang_display = settings.LANGUAGE_DATA[module.language]['human_readable']
     scenario_results = get_scenarios_responses(top_id, request.user)
-    return render(request, 'culture_content/topics.html', {'topic': topic, 'module': module, 'scenario_results': scenario_results})
+    return render(request, 'culture_content/topics.html', {'topic': topic, 'module': module, 'lang_display': lang_display, 'scenario_results': scenario_results})
 
 
 @login_required
@@ -73,7 +74,8 @@ def get_scenario_detail(request, scenario_id):
     module = Module.objects.get(topics__in=[topic.id])
     if module.language not in approved_lang_modules and request.user.is_staff==False:
         raise Http404("Page not found")
-    return render(request, 'culture_content/scenario.html', {'scenario': scenario, 'topic':topic, 'module':module})
+    lang_display = settings.LANGUAGE_DATA[module.language]['human_readable']
+    return render(request, 'culture_content/scenario.html', {'scenario': scenario, 'topic':topic, 'module':module, 'lang_display': lang_display,})
 
 
 @login_required
