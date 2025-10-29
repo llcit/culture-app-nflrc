@@ -18,7 +18,7 @@ function getCookie(name) {
             return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
         }
     //Ajax call
-    function saveResponse(answer_id, response){
+    function saveResponse(answer_id, response, ajax_root){
         var result =new Array();
         $.ajaxSetup({
         beforeSend: function(xhr, settings) {
@@ -28,7 +28,7 @@ function getCookie(name) {
         }
         });
         return $.ajax({
-            url: '/save_response/' + answer_id + '/' + response,
+            url: ajax_root + answer_id + '/' + response,
             type: 'post'
         });
 
