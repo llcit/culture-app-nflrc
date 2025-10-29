@@ -75,7 +75,7 @@ def get_scenario_detail(request, scenario_id):
     if module.language not in approved_lang_modules and request.user.is_staff==False:
         raise Http404("Page not found")
     lang_display = settings.LANGUAGE_DATA[module.language]['human_readable']
-    return render(request, 'culture_content/scenario.html', {'scenario': scenario, 'topic':topic, 'module':module, 'lang_display': lang_display,})
+    return render(request, 'culture_content/scenario.html', {'scenario': scenario, 'topic':topic, 'module':module, 'lang_display': lang_display, 'ajax_save_resp': settings.SITE_ROOT+'save_response/',})
 
 
 @login_required

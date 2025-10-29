@@ -197,7 +197,8 @@
                             eval = 2.5;
                         };
                 var chain = $.Deferred();
-                chain.resolve(promise=saveResponse(id, eval));
+                var ajax_root = "{{ ajax_save_resp }}";
+                chain.resolve(promise=saveResponse(id, eval, ajax_root));
                 promises.push(promise);
                 });
                 Promise.all(promises).then(function (data) {
