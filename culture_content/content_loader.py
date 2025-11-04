@@ -1,13 +1,14 @@
-import json
+import json, string
 from .models import *
 from django.contrib.auth.models import User
 
 user = User.objects.get(username='admin')
+content_path = '/Users/richardmedina/pythondev-nflrc/incontext-app-nflrc/module-content/'
 
 def load_module_content(file_name, LANGUAGE_CODE):
   print(f"Loading content from {file_name}...")
 
-  with open('/Users/richardmedina/pythondev-nflrc/incontext-app-nflrc/module-content/'+file_name, 'r', newline='') as f:
+  with open(content_path+file_name, 'r', newline='') as f:
     data = json.load(f)  
     for module in data:
 
@@ -21,8 +22,8 @@ def load_module_content(file_name, LANGUAGE_CODE):
       module_obj = Module.objects.create(
           name=module['module_title'],
           module_number=module['module_number'],
-          introduction=module['module_introduction'],
-          blurb=module['blurb'],
+          introduction="<p>"+module['module_introduction']+"</p>",
+          blurb="<p>"+module['blurb']+"</p>",
           objectives=learning_objectives,
           language=LANGUAGE_CODE,
           author=user,   
@@ -63,32 +64,43 @@ def load_module_content(file_name, LANGUAGE_CODE):
           context_data = scenario_data['context']
           context = ''
           for key, value in context_data.items():
-            context += f"{key}: {context_data[key]}<br>"
+            pkey = "<strong>"+string.capwords(key)+"</strong>" 
+            context += f"{pkey}: {context_data[key]}<br>"
 
+          cnote = scenario_data.get('culture_note', '')
+          if cnote:
+              cnote = "<p>" + cnote + "</p>"
+          lnote = scenario_data.get('language_note', '')
+          if lnote:
+              lnote = "<p>" + lnote + "</p>"
+          rnote=scenario_data.get('reflection_task', '')
+          if rnote:
+              rnote = "<p>" + rnote + "</p>"
+          enote=scenario_data.get('extension_task', '')
+          if enote:
+              enote = "<p>" + enote + "</p>"
+          
           scenario_obj = Scenario.objects.create(
               name=scenario_data['title'],
-              description=scenario_data['description'],
-              initial_information=context,
+              description="<p>"+scenario_data['description']+"</p>",
+              initial_information="<p>"+context+"</p>",
               judgment_task=judgement_task_obj,
-              language_note=scenario_data.get('language_note', ''),
-              culture_note=scenario_data.get('culture_note', ''),
-              reflection_task=scenario_data.get('reflection_task', ''),
-              extension_task=scenario_data.get('extension_task', ''),
+              language_note=lnote,
+              culture_note=cnote,
+              reflection_task=rnote,
+              extension_task=enote,
               author=user,
               order=scenario_data['scenario_number'],
           )
           topic_obj.scenarios.add(scenario_obj)
           
 
-# CLEANUP DURING TESTING          
+# CLEANUP DURING TESTING (Deletes all on cascade)       
 
-      #     judgement_task_obj.delete()
-      #     for answer in judgement_task_obj.answer_set.all():
-      #       answer.delete()
-      #   topic_obj.delete()
-      #   topic_learning_objectives.delete()
-      # learning_objectives.delete()          
-      # module_obj.delete()
+          judgement_task_obj.delete()
+        topic_learning_objectives.delete()
+      learning_objectives.delete()          
+      
 
 
 
