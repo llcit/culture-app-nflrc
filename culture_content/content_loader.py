@@ -2,8 +2,8 @@ import json, string
 from .models import *
 from django.contrib.auth.models import User
 
-user = User.objects.get(username='admin')
-content_path = '/Users/richardmedina/pythondev-nflrc/incontext-app-nflrc/module-content/'
+user = User.objects.get(username='ADMIN USERNAME')
+content_path = 'PATH TO CONTENT FILES/'
 
 def load_module_content(file_name, LANGUAGE_CODE):
   print(f"Loading content from {file_name}...")
@@ -105,11 +105,15 @@ def load_module_content(file_name, LANGUAGE_CODE):
 
 
 
-"""
+""" Running in the interactive django shell:
+from culture_content import content_loader
+
 jfiles = ["jpn-mod-1.json", "jpn-mod-2.json", "jpn-mod-3.json", "jpn-mod-4.json", "jpn-mod-5.json"]
 nfiles = ["jpn-mod-1-jpn.json", "jpn-mod-2-jpn.json", "jpn-mod-3-jpn.json", "jpn-mod-4-jpn.json", "jpn-mod-5-jpn.json"]
+
 for i in jfiles:
   content_loader.load_module_content(i, 'J')
+
 for i in nfiles:
   content_loader.load_module_content(i, 'N')
 
