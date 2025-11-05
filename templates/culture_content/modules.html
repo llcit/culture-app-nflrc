@@ -9,12 +9,13 @@
             <div class="card-section">
                 <a data-blurbshort="{{ obj.id}}">
                     <span class="custom-card-title-1">{{ obj.name }}</span>
-                    {{ obj.blurb|safe|truncatewords_html:40 }}
+                    {{ obj.blurb|safe }}
                     <p class="more-less">More</p>
                 </a>
                 <a data-blurbfull="{{ obj.id}}">
                     <span class="custom-card-title-1">{{ obj.name }}</span>
                     {{ obj.blurb|safe }}
+                    {{ obj.introduction|safe }}
                     <p class="more-less">Less</p>
                 </a>
             </div>
