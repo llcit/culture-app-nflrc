@@ -7,19 +7,16 @@ function create_slider(item){
                 '                                 <p>' + item[4] + '</p></div>\n' +
                 '                        <div class="col s5"><strong>Explanation</strong>\n' +
                 '                                 <p>' + item[5] + '</p></div>\n' +
-                '                        </div>\n' +
                 '                    </div>\n' +
                 '                    <div class="row valign-wrapper">\n' +
                 '                        <div class="col s2"><strong>Reference assessment</strong></div>\n' +
                 '                        <div class="col s8">\n' +
                 '                                <div class="' + class1 + '"></div>\n' +
-                '                        </div>\n' +
                 '                    </div>\n' +
                 '                     <div class="row valign-wrapper">\n' +
                 '                         <div class="col s2"><strong>Your response</strong></div>\n' +
                 '                         <div class="col s8">\n' +
                 '                                <div class="' + class2 + '"></div>\n' +
-                '                        </div>\n' +
                 '                    </div>\n' +
                 '                  </div>');
             $('.' + class1).attr('id', item[0]);

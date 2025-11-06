@@ -3,7 +3,7 @@
 {% block content %}
 <div class="section scrollspy">
     <div class="container">
-        <img src="{% static 'media/' %}{{img_url}}"  class="responsive-img">
+        <img src="{% static 'media/' %}{{img_url}}"  class="responsive-img center-fit-image">
         {% for obj in modules %}
         <div class ="card custom-card-color custom-scroll-margin" id="{{ obj.name}}">
             <div class="card-section">

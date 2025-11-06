@@ -3,15 +3,15 @@
 {% block content %}
     <div class="section scrollspy">
     <div class="container">
-       <img src='/static/culture/media/{{ module.image_for_topics }}' class="responsive-img">
+       <img src='/static/culture/media/{{ module.image_for_topics }}' class="responsive-img center-fit-image">
         <p>
             <a href="{% url 'home' %}mod/{{ module.language }}/">{{ lang_display }} <strong> > </strong> </a>
             <a href="{% url 'home' %}mod/{{ module.language }}#{{ module.name }}">{{ module.name }} <strong> > </strong> </a> 
             <a href="{% url 'home' %}top/{{ topic.id }}">{{ topic.name }}</a>
         </p>
         <h1 style="font-family: Roboto, Arial">{{ scenario.name }}</h1>
-        <a class="waves-effect blue btn" id="desbutton">Situation</a>
-        <a class="waves-effect blue btn" id="hidebutton">Hide situation</a>
+        <a class="button button-title" id="desbutton">Situation</a>
+        <a class="button button-title" id="hidebutton">Hide situation</a>
         <div class="spaces">
             <br>
             <br>
@@ -70,13 +70,13 @@
                          </div>
                     </div>
 
-     <a class="blue btn" id="send">Submit</a>
+     <a class="button button-title" id="send">Submit</a>
      <div class="spaces">
         <br>
         <br>
      </div>
     </div>
-    <a class="waves-effect blue btn" id="judgbutton">Task</a>
+    <a class="button button-title" id="judgbutton">Task</a>
     <div class="spaces">
     </br>
     </br>
@@ -87,7 +87,7 @@
                     <div id="results">
 
                     </div>
-        <a class="blue btn" id="next">Next</a>
+        <a class="button button-title" id="next">Next</a>
     </div>
     <div  id="feedback2">
 
@@ -115,18 +115,18 @@
                         {% endif %}
                          {% if scenario.reflection_task  %}
 
-                                    <h3>Reflection task for "{{ scenario.name }}"</h3>
+                                    <h3>Reflection Task</h3>
                                 <p>{{ scenario.reflection_task|safe  }}</p>
 
                         {% endif %}
                         {% if scenario.extension_task  %}
 
-                                    <h3>Extension task for "{{ scenario.name }}"</h3>
+                                    <h3>Extension Task</h3>
                                 <p>{{ scenario.extension_task|safe  }}</p>
 
                         {% endif %}
 
-                            <a id="next" href="{% url 'home' %}top/{{ topic.id }}">Other situations in topic "{{ topic.name }}"</a>
+                            <a id="next" href="{% url 'home' %}top/{{ topic.id }}" class="button button-title">"{{ topic.name }}" Situations</a>
 
                 </div>
     </div>

@@ -50,7 +50,7 @@
                             <i style="color: #fbd1a2;" class="large material-icons">person</i>
                         </a>
                         {% if request.user.is_staff %}
-                        <a href="{% url 'staff-review' %}" class="button-collapse right" data-activates="nav-mobile" style="color: #309ece">
+                        <a href="{% url 'staff-review' %}" class="button-collapse right" data-activates="nav-mobile" style="color: #24779b">
                             <i class="large material-icons">security</i>
                         </a>
                         {% endif %}
@@ -59,7 +59,7 @@
                             
                             {% if request.user.is_staff %}
                             <li>                                
-                                <a href="{% url 'staff-review' %}" class="right" style="color: #309ece"><i class="large material-icons">security</i></a>
+                                <a href="{% url 'staff-review' %}" class="right" style="color: #24779b"><i class="large material-icons">security</i></a>
                             </li>
                             {% endif %}
                             <li>
