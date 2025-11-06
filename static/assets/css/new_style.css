@@ -49,7 +49,7 @@ body {
 
 	p, ol, ul {
     font-family: 'Roboto', Arial, "sans-serif";
-    font-weight : 200;
+    font-weight : 300;
     font-size: 16pt;
     color : #221f1f;
 	line-height: 1.4;
@@ -76,7 +76,7 @@ body {
 
 	.instructions {
     font-family : Roboto, Arial, "sans-serif";
-    font-weight : 100;
+    font-weight : 300;
     font-size: 90%;
 	font-style: italic;
     color : rgba(29,28,28,1.00);
@@ -85,13 +85,13 @@ body {
 
 	.feedback {
     font-family : Roboto, Arial, "sans-serif";
-    font-weight : 100;
+    font-weight : 300;
     font-size: 90%;
-    color : rgba(3,155,229,1.00);
+    color : #24779b;
 }
 
 	a.button {
-  	background-color:#309ece;
+  	background-color:#24779b;
   	border: none;
   	color:#FFFFFF;
 	font-family : 'Montserrat', Arial, "sans-serif";
@@ -105,7 +105,7 @@ body {
 }
 
 	.button:hover {
-  background-color: #309ece;
+  background-color: #24779b;
   color: white;
 }
 
@@ -160,7 +160,7 @@ div.custom-card-title-3 {
 }
 
 a.button-title {
-	background-color:#309ece;
+	background-color:#24779b;
   	border: none;
   	color:#FFFFFF;
 	font-family : 'Montserrat', Arial, "sans-serif";
@@ -168,7 +168,7 @@ a.button-title {
 }
 
 p.more-less {
-	color: #309ece;
+	color: #24779b;
 	font-size:15pt;
 	font-weight:500;
 	text-align:right;
@@ -181,7 +181,7 @@ div.situation-grid {
 	align-items:center;
 	padding-top:2%;
 	padding-left:5%;
-	padding-bottom:5%;
+	padding-bottom:2%;
 	border-radius:5px;
 }
 
@@ -223,4 +223,28 @@ input[type=range] + .thumb {
 }
 input[type=range] + .thumb.active .value {
     visibility: hidden;
+}
+
+.breadcrumb-menu{
+	font-size: 12pt;
+	a {
+		color:#221f1f;
+	}
+	span {
+		color:#24779b;
+	}
+}
+
+.center-fit-image {
+	width:100vw;
+	justify-content: center;
+}
+
+.feedback-card {
+	padding: 1.0em;
+	margin-bottom: 2.5em;
+}
+.expert-comp {
+	background-color: white;
+	padding: 0.5em
 }

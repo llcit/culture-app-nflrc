@@ -1,25 +1,22 @@
 function create_slider(item){
            var  class1 = 'slider-experts-' + item[0];
            var class2 = 'slider-results-' + item[2];
-            $('#results').append('<div class="card custom-card-color">\n' +
-                                    '<div class="row valign-wrapper">\n' +
-                '                        <div class="col s5"><strong>Option</strong>\n' +
-                '                                 <p>' + item[4] + '</p></div>\n' +
-                '                        <div class="col s5"><strong>Explanation</strong>\n' +
-                '                                 <p>' + item[5] + '</p></div>\n' +
-                '                        </div>\n' +
+            $('#results').append('<div class="card custom-card-color feedback-card" >\n' +
+                                    '<div class="row">\n' +
+                '                        <div class="col col s12 l6"><p><strong>Option</strong></p>\n<p>' + item[4] + '</p></div>\n' +
+                '                        <div class="col col s12 l6"><p><strong>Explanation</strong></p>\n' + '<p>' + item[5] + '</p></div>\n' +
                 '                    </div>\n' +
-                '                    <div class="row valign-wrapper">\n' +
-                '                        <div class="col s2"><strong>Reference assessment</strong></div>\n' +
-                '                        <div class="col s8">\n' +
-                '                                <div class="' + class1 + '"></div>\n' +
-                '                        </div>\n' +
-                '                    </div>\n' +
-                '                     <div class="row valign-wrapper">\n' +
-                '                         <div class="col s2"><strong>Your response</strong></div>\n' +
-                '                         <div class="col s8">\n' +
+                '                    <div class="expert-comp">\n' +
+                '                       <div class="row">\n' +
+                '                            <div class="col s12">\n<p>Reference assessment</p>\n' +
+                '                                    <div class="' + class1 + '"></div>\n' +
+                '                           </div>\n' +
+                '                       </div>\n' +
+                '                       <div class="row valign-wrapper">\n' +
+                '                           <div class="col s12">\n<p>Your response</p>\n' +
                 '                                <div class="' + class2 + '"></div>\n' +
-                '                        </div>\n' +
+                '                           </div>\n' +
+                '                       </div>\n' +
                 '                    </div>\n' +
                 '                  </div>');
             $('.' + class1).attr('id', item[0]);
@@ -56,10 +53,10 @@ function create_slider(item){
                 'min': 0,
                 'max': 5
             },
-            pips: {
-                mode: 'range',
-                density: 20
-            },
+            // pips: {
+            //     mode: 'range',
+            //     density: 20
+            // },
             format: wNumb({
                 decimals: 1
             })
