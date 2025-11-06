@@ -239,3 +239,12 @@ input[type=range] + .thumb.active .value {
 	width:100vw;
 	justify-content: center;
 }
+
+.feedback-card {
+	padding: 1.0em;
+	margin-bottom: 2.5em;
+}
+.expert-comp {
+	background-color: white;
+	padding: 0.5em
+}
