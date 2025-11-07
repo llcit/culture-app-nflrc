@@ -1,80 +1,77 @@
 {% extends 'base.html' %}
-{% load static  %}
+{% load static %}
 {% block content %}
 <div class="section scrollspy">
     <div class="container">
-     {% if topic.topic_image %}
-        <a href="{% url 'home' %}mod/{{ module.language }}/"><img src='/static/culture/media/{{ topic.topic_image }}' class="responsive-img"></a>
-    {% else %}
-     <a href="{% url 'home' %}mod/{{ module.language }}/"><img src='/static/culture/media/{{ module.image_for_topics }}' class="responsive-img"></a>
-    {% endif %}
-     <!--<p>
-        <a href="{% url 'home' %}mod/{{ module.language }}/">{{ module.name }}</a>
-    </p> -->
-    
-    <div class="nav-wrapper">
-        <a href="{% url 'home' %}mod/{{ module.language }}/" style="">{{ lang_display }} <strong> &gt; </strong></a>
-        <a href="{% url 'home' %}mod/{{ module.language }}#{{module.name}}" style="">{{module.name}} <strong> &gt; </strong></a>      
-        <span style="">{{topic.name}}<span>
-    </div>
-    <br><br>
-                    <span class="custom-card-title-1 custom-title-padding">{{ topic.name }}</span>
-                    {% if topic.activation %}
-                        <p>{{ topic.activation|safe }}</p>
-                    {% endif %}
-                     {% if topic.new_information %}
-                        <!-- <p>{{ topic.new_information|safe }}</p> -->
-                    {% endif %}
-                    {% if topic.objectives %}
-                    <!-- <h3>Learning Objectives</h3> -->
-                        <!-- <p>{{ topic.objectives.objectives|safe }}</p> -->
-                    {% endif %}
-                    <span class="custom-card-title-2 custom-title-padding">Situations</span>
+        {% if topic.topic_image %}
+            <a href="{% url 'home' %}mod/{{ module.language }}/"><img src='/static/culture/media/{{ topic.topic_image }}' class="responsive-img"></a>
+        {% else %}
+            <a href="{% url 'home' %}mod/{{ module.language }}/"><img src='/static/culture/media/{{ module.image_for_topics }}' class="responsive-img"></a>
+        {% endif %}
 
-                    
-                    {% for scenario in scenario_results %}
-                        <div class="card custom-card-color situation-grid">
-                        <div class="situation-grid-child custom-card-title-3 situation-title-margin">{{ scenario.0 }}</div>
-                        <div class="situation-grid-child"><p>Attempts</p></div>
-                        <div class="situation-grid-child"><a class="button button-title" href="{% url 'home' %}scenario/{{ scenario.0.pk }} ">Begin</a></div>
-                        <div class="situation-grid-child"> {% if scenario.1.0 == 0 %}
-                            <a class="chip custom-red-chip" data-position="top" data-chip="This is the number of times that you have completed this scenario"> {{ scenario.1.0}}</a>
-                            {% else %}
-                            <a class="chip custom-green-chip"  data-position="top" data-chip="This is the number of times that you have completed this scenario"> {{ scenario.1.0 }}</a>
-                            {% endif %}
-                        </div>
-                        </div>
-                                
-                            
+        <div class="nav-wrapper">
+            <p>
+                <a href="{% url 'home' %}mod/{{ module.language }}/">{{ lang_display }}</a> <span style="color: #039be5;">&#9679;</span>
+                <a href="{% url 'home' %}mod/{{ module.language }}#{{module.name}}">{{module.name}}</a>
+                <!-- <span>{{topic.name}}</span> -->
+            </p>
+        </div>
+        <br><br>
+        <span class="custom-card-title-1 custom-title-padding">{{ topic.name }}</span>
+        {% if topic.activation %}
+            <p>{{ topic.activation|safe }}</p>
+        {% endif %}
+        {% if topic.new_information %}
+            <!-- <p>{{ topic.new_information|safe }}</p> -->
+        {% endif %}
+        {% if topic.objectives %}
+            <!-- <h3>Learning Objectives</h3> -->
+            <!-- <p>{{ topic.objectives.objectives|safe }}</p> -->
+        {% endif %}
+        <span class="custom-card-title-2 custom-title-padding">Situations</span>
 
-                    {% endfor %}
-                    
+        {% for scenario in scenario_results %}
+            <div class="card custom-card-color situation-grid">
+                <div class="situation-grid-child custom-card-title-3 situation-title-margin">{{ scenario.0 }}</div>
+                <div class="situation-grid-child">
+                    <p>Attempts</p>
+                </div>
+                <div><a class="button button-title" href="{% url 'home' %}scenario/{{ scenario.0.pk }} ">Begin</a>
+                </div>
+                <div class="situation-grid-child"> {% if scenario.1.0 == 0 %}
+                    <a class="chip custom-red-chip" data-position="top" data-chip="This is the number of times that you have completed this scenario">{{ scenario.1.0 }}</a>
+                    {% else %}
+                    <a class="chip custom-green-chip" data-position="top" data-chip="This is the number of times that you have completed this scenario">{{ scenario.1.0 }}</a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
 
-                    {% if topic.reflection %}
-                    <!-- <h3>Reflection task for "{{ topic.name }}"</h3> -->
-                        <!-- <p>{{ topic.reflection|safe }}</p> -->
-                    {% endif %}
-                    {% if topic.roleplay %}
-                    <!-- <h3>Roleplay</h3> -->
-                        <!-- <p>{{ topic.roleplay|safe }}</p> -->
-                    {% endif %}
-                    {% if topic.extension %}
-                    <!-- <h3>Extension task</h3> -->
-                        <!-- <p>{{ topic.extension|safe }}</p> -->
-                    {% endif %}
+
+        {% if topic.reflection %}
+            <!-- <h3>Reflection task for "{{ topic.name }}"</h3> -->
+            <!-- <p>{{ topic.reflection|safe }}</p> -->
+        {% endif %}
+        {% if topic.roleplay %}
+            <!-- <h3>Roleplay</h3> -->
+            <!-- <p>{{ topic.roleplay|safe }}</p> -->
+        {% endif %}
+        {% if topic.extension %}
+            <!-- <h3>Extension task</h3> -->
+            <!-- <p>{{ topic.extension|safe }}</p> -->
+        {% endif %}
     </div>
 
 </div>
 {% endblock %}
 {% block js %}
-    <script>
+<script>
+    $(document).ready(function () {
 
-     $(document).ready(function(){
-
-        $( "#reflection" ).hide();
-        $( "#reflectitle" ).click(function() {
-        $( "#reflection" ).toggle("slow");
-            });
+        $("#reflection").hide();
+        $("#reflectitle").click(function () {
+            $("#reflection").toggle("slow");
         });
-    </script>
+    });
+</script>
 {% endblock %}
