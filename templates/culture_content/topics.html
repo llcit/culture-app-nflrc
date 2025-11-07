@@ -4,9 +4,9 @@
 <div class="section scrollspy">
     <div class="container">
         {% if topic.topic_image %}
-            <a href="{% url 'home' %}mod/{{ module.language }}/"><img src='/static/culture/media/{{ topic.topic_image }}' class="responsive-img"></a>
+            <a href="{% url 'home' %}mod/{{ module.language }}/"><img src='/static/culture/media/{{ topic.topic_image }}' class="responsive-img center-fit-image"></a>
         {% else %}
-            <a href="{% url 'home' %}mod/{{ module.language }}/"><img src='/static/culture/media/{{ module.image_for_topics }}' class="responsive-img"></a>
+            <a href="{% url 'home' %}mod/{{ module.language }}/"><img src='/static/culture/media/{{ module.image_for_topics }}' class="responsive-img center-fit-image"></a>
         {% endif %}
 
         <div class="nav-wrapper">
@@ -16,8 +16,12 @@
                 <!-- <span>{{topic.name}}</span> -->
             </p>
         </div>
-        <br><br>
-        <span class="custom-card-title-1 custom-title-padding">{{ topic.name }}</span>
+        <p>
+            <span class="custom-card-title-1 custom-title-padding">{{ topic.name }}</span>
+            {% if request.user.is_staff %} 
+            <span class="custom-card-subtitle-1"><a href="{% url 'home' %}admin/culture_content/topic/{{topic.pk}}/change" target="_blank">edit</a></span>
+            {% endif %}
+        </p>
         {% if topic.activation %}
             <p>{{ topic.activation|safe }}</p>
         {% endif %}
