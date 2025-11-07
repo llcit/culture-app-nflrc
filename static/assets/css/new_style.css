@@ -176,7 +176,7 @@ p.more-less {
 
 div.situation-grid {
 	display: grid;
-    grid-template-columns: 3fr 1fr;
+  grid-template-columns: 3fr 1fr;
 	grid-template-rows: 2fr;
 	align-items:center;
 	padding-top:2%;
@@ -188,7 +188,7 @@ div.situation-grid {
 .custom-green-chip {
 	background-color: #1c7c54;
 	color:#FFFFFF;
-	font-size: 26pt;
+	font-size: 1.8rem;
 	width: 50%;
 	text-align:center;
 }
@@ -196,7 +196,7 @@ div.situation-grid {
 .custom-red-chip {
 	background-color: #d62246;
 	color:#FFFFFF;
-	font-size: 26pt;
+	font-size: 1.8rem;
 	width: 50%;
 	text-align:center;
 }
@@ -241,10 +241,10 @@ input[type=range] + .thumb.active .value {
 }
 
 .feedback-card {
-	padding: 1.0em;
+	padding: 1.0em 3.0em 2.0em 3.0em;
 	margin-bottom: 2.5em;
 }
 .expert-comp {
 	background-color: white;
-	padding: 0.5em
+	padding: 1.0em 2.0em 2.0em 2.0em; 
 }
