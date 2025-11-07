@@ -8,7 +8,7 @@
         <div class ="card custom-card-color custom-scroll-margin" id="{{ obj.name}}">
             <div class="card-section">
                 <a data-blurbshort="{{ obj.id}}">
-                    <span class="custom-card-title-1">{{ obj.name }}</span>
+                    <span class="custom-card-title-1">{{ obj.name }}</span>                    
                     {{ obj.blurb|safe }}
                     <p class="more-less">More</p>
                 </a>
@@ -18,7 +18,11 @@
                     {{ obj.introduction|safe }}
                     <p class="more-less">Less</p>
                 </a>
+                {% if request.user.is_staff %} 
+                <span class="custom-card-subtitle-1"><a href="{% url 'home' %}admin/culture_content/module/{{obj.pk}}/change" target="_blank">edit</a></span>
+                {% endif %} 
             </div>
+
             <div class="card-section">
                 <a data-topicsshort="{{ obj.id}}">
                     <i class="material-icons">keyboard_arrow_right</i><span class="custom-card-title-2">Topics</span>

@@ -13,7 +13,12 @@
                 <a href="{% url 'home' %}top/{{ topic.id }}">{{ topic.name }}</a>
             </p>
         </div>
-        <h1 style="font-family: Roboto, Arial">{{ scenario.name }}</h1>
+        <p>
+            <span class="custom-card-title-1 custom-title-padding">{{ scenario.name }}</span>
+            {% if request.user.is_staff %} 
+            <span class="custom-card-subtitle-1"><a href="{% url 'home' %}admin/culture_content/scenario/{{scenario.pk}}/change" target="_blank">edit</a></span>
+            {% endif %}
+        </p>
         <a class="button button-title" id="desbutton" href="#!">Situation</a>
         <a class="button button-title" id="hidebutton" href="#!">Hide situation</a>
         <div class="spaces">
@@ -85,6 +90,9 @@
         <div id="feedback" style="padding-bottom: 2.0rem;">
             <p class="instructions">{{ scenario.description|safe }}</p>
             <h3>Feedback</h3>
+            {% if request.user.is_staff %} 
+            <p><span class="custom-card-subtitle-1"><a href="{% url 'home' %}admin/culture_content/judgmenttask/{{scenario.judgment_task.pk}}/change" target="_blank">edit judgement tasks</a></span></p>
+            {% endif %}
             <div id="results"></div>
             <a class="button button-title" id="next" href="#!">Next</a>
         </div>

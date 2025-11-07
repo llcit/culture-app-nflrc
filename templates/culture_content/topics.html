@@ -16,8 +16,12 @@
                 <!-- <span>{{topic.name}}</span> -->
             </p>
         </div>
-        <br><br>
-        <span class="custom-card-title-1 custom-title-padding">{{ topic.name }}</span>
+        <p>
+            <span class="custom-card-title-1 custom-title-padding">{{ topic.name }}</span>
+            {% if request.user.is_staff %} 
+            <span class="custom-card-subtitle-1"><a href="{% url 'home' %}admin/culture_content/topic/{{topic.pk}}/change" target="_blank">edit</a></span>
+            {% endif %}
+        </p>
         {% if topic.activation %}
             <p>{{ topic.activation|safe }}</p>
         {% endif %}
