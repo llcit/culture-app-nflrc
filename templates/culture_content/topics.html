@@ -30,6 +30,9 @@
         {% endif %}
         {% if topic.objectives %}
             <h3>Learning Objectives</h3>
+            {% if request.user.is_staff %} 
+                <span class="custom-card-subtitle-1"><a href="{% url 'home' %}admin/culture_content/learningobjectives/{{topic.objectives.pk}}/change" target="_blank">edit</a></span>
+            {% endif %}
             <p>{{ topic.objectives.objectives|safe }}</p>
         {% endif %}
         <span class="custom-card-title-2 custom-title-padding">Situations</span>
@@ -55,6 +58,7 @@
         {% if topic.reflection %}
             <h3>Reflection task for "{{ topic.name }}"</h3>
             <p>{{ topic.reflection|safe }}</p>
+            
         {% endif %}
         {% if topic.roleplay %}
             <h3>Roleplay</h3>
