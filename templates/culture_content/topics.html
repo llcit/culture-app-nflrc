@@ -26,11 +26,11 @@
             <p>{{ topic.activation|safe }}</p>
         {% endif %}
         {% if topic.new_information %}
-            <!-- <p>{{ topic.new_information|safe }}</p> -->
+            <p>{{ topic.new_information|safe }}</p>
         {% endif %}
         {% if topic.objectives %}
-            <!-- <h3>Learning Objectives</h3> -->
-            <!-- <p>{{ topic.objectives.objectives|safe }}</p> -->
+            <h3>Learning Objectives</h3>
+            <p>{{ topic.objectives.objectives|safe }}</p>
         {% endif %}
         <span class="custom-card-title-2 custom-title-padding">Situations</span>
 
@@ -53,16 +53,16 @@
 
 
         {% if topic.reflection %}
-            <!-- <h3>Reflection task for "{{ topic.name }}"</h3> -->
-            <!-- <p>{{ topic.reflection|safe }}</p> -->
+            <h3>Reflection task for "{{ topic.name }}"</h3>
+            <p>{{ topic.reflection|safe }}</p>
         {% endif %}
         {% if topic.roleplay %}
-            <!-- <h3>Roleplay</h3> -->
-            <!-- <p>{{ topic.roleplay|safe }}</p> -->
+            <h3>Roleplay</h3>
+            <p>{{ topic.roleplay|safe }}</p>
         {% endif %}
         {% if topic.extension %}
-            <!-- <h3>Extension task</h3> -->
-            <!-- <p>{{ topic.extension|safe }}</p> -->
+            <h3>Extension task</h3>
+            <p>{{ topic.extension|safe }}</p>
         {% endif %}
     </div>
 

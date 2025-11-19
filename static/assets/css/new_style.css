@@ -76,9 +76,9 @@ body {
 
 	.instructions {
     font-family : Roboto, Arial, "sans-serif";
-    font-weight : 300;
+    font-weight : 600;
     font-size: 1.8em;
-		font-style: italic;
+		/* font-style: italic; */
     color : rgba(29,28,28,1.00);
 	line-height: 1;
 }
