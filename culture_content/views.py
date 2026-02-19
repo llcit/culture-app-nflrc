@@ -27,7 +27,7 @@ def home(request):
     for lang, data in settings.LANGUAGE_DATA.items():
         if data['status'] == 'active':
             p = random.choice(lang_img_paths[lang])
-            language_list.append({'url': lang, 'image_url': p, 'lang_name': data['display']})
+            language_list.append({'url': lang, 'image_url': p, 'lang_name': data['human_readable']})
  
     template_context = {'languages': language_list}
     return render(request, 'culture_content/home.html', template_context)

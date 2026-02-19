@@ -5,9 +5,14 @@
 <div class="container">
     <br>
     {% for i in languages %}
+    <div style="position: relative; display: inline-block;">
         <a href="{% url 'modules' i.url %}">  
             <img src="{% static 'media/' %}{{i.image_url}}"  alt="{{i.lang_name}}" class="responsive-img">
+            <h1 style="position: absolute; top: 10px; left: 10px;  color: white; background-color: rgb(54, 52, 52); padding: 15px; border-radius: 10px; opacity: 0.9;">
+                {{ i.lang_name }}
+            </h1>
         </a>
+    </div>
     {% endfor %}
 </div>
 {% endblock %}
