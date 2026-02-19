@@ -17,7 +17,7 @@ approved_lang_modules = [v['code'] for k, v in settings.LANGUAGE_DATA.items() if
 
 # Assemble list of possible images for each language.
 lang_img_paths = {
-    lang: [data['img_home'] + '/' + os.path.basename(r) for r in glob(IMAGE_PATH + r'/' + data['img_home'] + r'/*.jpg')]
+    lang: [data['img_home'] + '/' + os.path.basename(r) for r in glob(IMAGE_PATH + r'/' + data['img_home'] + r'/*.*g')]
     for lang, data in settings.LANGUAGE_DATA.items()
 }    
 
