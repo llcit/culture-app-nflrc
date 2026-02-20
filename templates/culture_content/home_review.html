@@ -7,9 +7,14 @@
     <br>
     {% for i in languages %}
         {% if i.url != 'L' %}
-        <a href="{% url 'modules' i.url %}">  
-            <img src="{% static 'media/' %}{{i.image_url}}"  alt="{{i.lang_name}}" class="responsive-img">
-        </a>
+        <div style="position: relative; display: inline-block;">
+            <a href="{% url 'modules' i.url %}">  
+                <img src="{% static 'media/' %}{{i.image_url}}"  alt="{{i.lang_name}}" class="responsive-img">
+                <h1 class="title-label">
+                    {{ i.lang_name }}
+                </h1>
+            </a>
+        </div>
         {% endif %}
     {% endfor %}
 </div>

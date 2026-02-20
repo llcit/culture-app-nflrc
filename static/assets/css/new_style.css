@@ -248,3 +248,14 @@ input[type=range] + .thumb.active .value {
 	background-color: white;
 	padding: 1.0em 2.0em 2.0em 2.0em; 
 }
+
+.title-label {
+	position: absolute;
+	bottom: 5px;
+	left: 5px;
+	color: white;
+	background-color: rgb(54, 52, 52);
+	padding: 15px;
+	border-radius: 10px;
+	opacity: 0.8;
+}
