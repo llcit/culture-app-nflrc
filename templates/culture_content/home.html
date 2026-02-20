@@ -5,7 +5,7 @@
 <div class="container">
     <br>
     {% for i in languages %}
-    <div style="position: relative; display: inline-block;">
+    <div style="position: relative; display: inline-block; padding-top: 5px">
         <a href="{% url 'modules' i.url %}">  
             <img src="{% static 'media/' %}{{i.image_url}}"  alt="{{i.lang_name}}" class="responsive-img">
             <h1 class="title-label">
