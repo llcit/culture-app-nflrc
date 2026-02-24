@@ -14,6 +14,7 @@
 
     <link href="{% static '/assets/min/custom-min.css' %}" type="text/css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=comment" />
     <link href="{% static '/assets/css/materialize.css' %}" type="text/css" rel="stylesheet">
     <link href="{% static '/assets/css/nouislider.css' %}" type="text/css" rel="stylesheet">
     <link href="{% static '/assets/css/rangeslider.css' %}" type="text/css" rel="stylesheet">
@@ -40,23 +41,30 @@
         <div class="navbar-fixed">
             <nav id="nav_f" style="background-color: #fff" role="navigation">
                 <div class="container">
-                    <div class="nav-wrapper">
+                    <div class="nav-wrapper">                     
                         <a href="{% url 'home' %}" class="brand-logo left">
                             <img src="{% static '/media/brand/temp-imi-logo.png' %}"
                                 alt="Imi logo" height="60" style="padding-top: 10px;"/>
                         </a>
                         
                         <a href="{% url 'user_profile' %}" class="button-collapse right" data-activates="nav-mobile">
-                            <i style="color: #fbd1a2;" class="large material-icons">person</i>
+                            <i style="color: #757575;" class="large material-icons">person</i>
                         </a>
                         {% if request.user.is_staff %}
                         <a href="{% url 'staff-review' %}" class="button-collapse right" data-activates="nav-mobile" style="color: #24779b">
                             <i class="large material-icons">security</i>
                         </a>
                         {% endif %}
+                        <a href="https://forms.gle/e4hLeK7DGGiSopoWA" target="_blank" class="button-collapse right" data-activates="nav-mobile" >
+                            <i style="color: #757575;" class="large material-icons">comment</i>
+                        </a>
 
                         <ul id="nav-mobile" class="right hide-on-med-and-down">
-                            
+                            <li>
+                                <a href="https://forms.gle/e4hLeK7DGGiSopoWA" target="_blank" class="right" data-activates="nav-mobile" title="Leave feedback or report a bug.">
+                                    <i style="color: #757575;" class="large material-icons">comment</i>
+                                </a>
+                            </li>
                             {% if request.user.is_staff %}
                             <li>                                
                                 <a href="{% url 'staff-review' %}" class="right" style="color: #24779b"><i class="large material-icons">security</i></a>
@@ -66,7 +74,9 @@
                                 <a href="{% url 'user_profile' %}">
                                     <i style="color: rgb(75, 75, 75);" class="large material-icons">person</i>
                                 </a>
-                            </li>                            
+                            </li>
+                            
+                        </a>                            
                         </ul>
                     </div>
                 </div>
