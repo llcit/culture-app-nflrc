@@ -48,7 +48,7 @@
                         </a>
                         
                         <a href="{% url 'user_profile' %}" class="button-collapse right" data-activates="nav-mobile">
-                            <i style="color: #757575;" class="large material-icons">person</i>
+                            <i style="color: rgb(75, 75, 75);" class="large material-icons">person</i>
                         </a>
                         {% if request.user.is_staff %}
                         <a href="{% url 'staff-review' %}" class="button-collapse right" data-activates="nav-mobile" style="color: #24779b">
@@ -62,7 +62,7 @@
                         <ul id="nav-mobile" class="right hide-on-med-and-down">
                             <li>
                                 <a href="https://forms.gle/e4hLeK7DGGiSopoWA" target="_blank" class="right" data-activates="nav-mobile" title="Leave feedback or report a bug.">
-                                    <i style="color: #757575;" class="large material-icons">comment</i>
+                                    <i style="color: rgb(75, 75, 75);" class="large material-icons">comment</i>
                                 </a>
                             </li>
                             {% if request.user.is_staff %}
