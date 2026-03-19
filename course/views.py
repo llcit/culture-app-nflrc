@@ -105,10 +105,12 @@ def remove_user_from_course(request):
 
 class CourseCreate(CreateView):
 		model = Course
-		success_url ='/imi/profile'
+		success_url = settings.SITE_ROOT +'profile'
 		fields = ['name', 'enrollment_key']
 
 		def form_valid(self, form):
 			self.object = form.save()
 			self.object.instructor.add(self.request.user)
+			self.object.language = self.request.user.profile.language
+			self.object.save()
 			return HttpResponseRedirect(self.get_success_url())

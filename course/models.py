@@ -2,19 +2,9 @@ from django.db import models
 from culture_content.models import Profile
 from datetime import datetime
 from django.contrib.auth.models import User
+from django.conf import settings
 
-lang_choices = (
-    ('C', 'Chinese'),
-    ('R', 'Russian'),
-    ('A', 'Arabic'),
-    ('L', 'All'),
-    ('E', 'Russian-in-English'),
-    ('B', 'Arabic-in-Arabic'),
-	('P', 'Portuguese-in-English'),
-    ('D', 'Portuguese-in-Portuguese'),
-    ('F', 'French'),
-    ('W', 'Swahili')
-)
+lang_choices = settings.LANGUAGE_CHOICES
 
 
 class Course(models.Model):
