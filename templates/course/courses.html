@@ -57,7 +57,7 @@ $( document ).ready(function() {
 
         $.ajax({
             type: 'POST',
-            url: '{{ site_root }}enroll',
+            url: '{% url "enroll" %}',
 
             data: {
                 course: courseid,
@@ -68,7 +68,7 @@ $( document ).ready(function() {
             success: function (json) {
                 if (json['response']==1){
                     $("#response").html(json['message']);
-                    window.location.assign('{{site_root}}profile');
+                    window.location.assign('{% url "user_profile" %}');
 
                 }
                 else{
