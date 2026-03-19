@@ -5,7 +5,7 @@
 
 <div class="container">
 
-
+{{request.get_host}} {{request.build_absolute_uri}}
 <h1>Available Courses</h1> You will need to input a valid enrollment key to register in a course.
 <br>
 <br>
@@ -57,7 +57,7 @@ $( document ).ready(function() {
 
         $.ajax({
             type: 'POST',
-            url: '/culture/enroll',
+            url: '/enroll',
 
             data: {
                 course: courseid,
@@ -68,7 +68,7 @@ $( document ).ready(function() {
             success: function (json) {
                 if (json['response']==1){
                     $("#response").html(json['message']);
-                    window.location.assign('https://lftic.lll.hawaii.edu/culture/profile');
+                    window.location.assign('/profile');
 
                 }
                 else{

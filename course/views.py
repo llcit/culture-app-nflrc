@@ -30,7 +30,7 @@ def request_user(request):
 								data.password = make_password(passw)
 								data.save()
 								'''send_mail(
-									'InContext app new account',
+									'\'Imi app new account',
 									'A request has been received to create an account with your email. The password associated with your email is: ' + data.password,
 									'llcit@hawaii.edu',
 									[email],
@@ -104,7 +104,7 @@ def remove_user_from_course(request):
 
 class CourseCreate(CreateView):
 		model = Course
-		success_url ='/profile'
+		success_url ='/imi/profile'
 		fields = ['name', 'enrollment_key']
 
 		def form_valid(self, form):
