@@ -11,6 +11,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.core.mail import send_mail
 from django.http import JsonResponse
 from django.views.generic.edit import CreateView
+from django.conf import settings
 
 
 
@@ -70,7 +71,7 @@ def get_user_data(request):
 def get_courses(request):
 	profile = Profile.objects.get(user=request.user)
 	courses = Course.objects.exclude(participants__in=[profile]).filter(active=True).order_by('name')
-	return render(request, 'course/courses.html', {'courses': courses})
+	return render(request, 'course/courses.html', {'courses': courses, 'site_root': settings.SITE_ROOT})
 
 
 @login_required
