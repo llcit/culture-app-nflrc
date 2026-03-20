@@ -8,7 +8,7 @@
     <div style="position: relative; display: inline-block; padding-top: 5px">
         <a href="{% url 'modules' i.url %}">  
             <img src="{% static 'media/' %}{{i.image_url}}"  alt="{{i.lang_name}}" class="responsive-img">
-            {% if i.lang_name != 'Getting Started' %}
+            {% if i.lang_name != 'Quickstart' %}
             <h1 class="title-label">
                 {{ i.lang_name }}
             </h1>
