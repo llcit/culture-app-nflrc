@@ -6,9 +6,10 @@
     <h1>Student Profile Page</h1>
     <hr>
     <p>Username <b>{{request.user}}</b> (<a href="{% url 'password_change' %}">change password</a>)</p>
+    <p>Email: <b>{{request.user.email}}</b> </p>
 
     {% if request.user.is_staff %}
-    <p>You have staff permissions. <a class="red-text" href="{% url 'staff-review' %}">Go to Content Review Home </a>
+    <p>Status: <b>Staff</b> <span style="font-size:small"><a href="{% url 'staff-review' %}">( review content )</a>.</span></p>
     </p>
     {% endif %}
 
@@ -28,27 +29,20 @@
     
     <h2>Track your progress</h2>
     <h3>Scenarios</h3>
-    <p>The following table presents your results on judgment tasks that fall below the acceptance threshold in
-        situations (scenarios) in the InContext app.
-        The table lists situations in your course as rows in a table. </p>
-    <p>For each listed situation, you can see the percentage that indicates, for the total of all options presented in
-        that situation's judgment task, in what proportion of responses the user's slider fell within the zone or band
-        of reference opinions.
-        If a user's slider fell outside this band, no matter whether close or far away, their response was counted as
-        "not in agreement."</p>
+    <p>The following table presents your results on judgment tasks that fall below the acceptance threshold in situations (scenarios) in the 'Imi app. The table lists situations in your course as rows in a table. </p>
+    <p>For each listed situation, you can see the percentage that indicates, for the total of all options presented in that situation's judgment task, in what proportion of responses the user's slider fell within the zone or band of reference opinions. If a user's slider fell outside this band, no matter whether close or far away, their response was counted as "not in agreement."</p>
     <h3>The following scenarios need your attention!</h3>
     <ul class="collection">
         {% for result in results %}
-        {% if result.1.1 < 66 %} <li class="collection-item">
-
-            <h4>{{ result.0.name }} | {{ result.1.1 }} % {% if result.1.1 < 30 %}<i class=" red small material-icons">
-                    sentiment_very_dissatisfied</i>
-                    {% elif result.1.1 > 29 %}<i class=" yellow small material-icons">sentiment_neutral</i>
-                    {% endif %}</h4>
-
+            {% if result.1.1 < 66 %} 
+            <li class="collection-item">            
+                <a href="{% url 'scenario' scenario_id=result.0.id %}">{{ result.0.name }}</a> | {{ result.1.1 }} 
+                {% if result.1.1 < 30 %}<i class=" red small material-icons">sentiment_very_dissatisfied</i>
+                {% elif result.1.1 > 29 %}<i class=" yellow small material-icons">sentiment_neutral</i>
+                {% endif %}         
             </li>
             {% endif %}
-            {% endfor %}
+        {% endfor %}
     </ul>
 </div>
 {% endblock %}
