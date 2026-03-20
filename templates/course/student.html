@@ -36,7 +36,7 @@
         {% for result in results %}
             {% if result.1.1 < 66 %} 
             <li class="collection-item">            
-                <a href="{% url 'scenario' scenario_id=result.0.id %}">{{ result.0.name }}</a> | {{ result.1.1 }} 
+                <a href="{% url 'scenario' scenario_id=result.0.id %}">{{ result.0.name }}</a> | {{ result.1.1 }}% 
                 {% if result.1.1 < 30 %}<i class=" red small material-icons">sentiment_very_dissatisfied</i>
                 {% elif result.1.1 > 29 %}<i class=" yellow small material-icons">sentiment_neutral</i>
                 {% endif %}         
