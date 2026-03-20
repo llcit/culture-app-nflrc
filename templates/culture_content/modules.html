@@ -4,10 +4,12 @@
 <div class="section scrollspy">
     <div class="container">
         <div style="position: relative; display: inline-block;">
-                <img src="{% static 'media/' %}{{img_url}}" alt="{{i.lang_name}}" class="responsive-img center-fit-image">
+                <img src="{% static 'media/' %}{{img_url}}" alt="{{ title }}" class="responsive-img center-fit-image">
+                {% if lang_code != 'L' %}
                 <h1 class="title-label">
                     {{ title }}
                 </h1>
+                {% endif %}
         </div>
         {% for obj in modules %}
         <div class ="card custom-card-color custom-scroll-margin" id="{{ obj.name}}">

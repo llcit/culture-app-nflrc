@@ -27,7 +27,7 @@ def home(request):
     for lang, data in settings.LANGUAGE_DATA.items():
         if data['status'] == 'active':
             p = random.choice(lang_img_paths[lang])
-            language_list.append({'url': lang, 'image_url': p, 'lang_name': data['human_readable']})
+            language_list.append({'url': lang, 'image_url': p, 'lang_name': data['human_readable'], 'lang_code': data['code']})
  
     template_context = {'languages': language_list}
     return render(request, 'culture_content/home.html', template_context)
@@ -54,7 +54,7 @@ def get_modules(request, lang):
         p = random.choice(lang_img_paths[lang])
         modules = Module.objects.filter(language=lang).order_by('module_number')
         title = settings.LANGUAGE_DATA[lang]['human_readable']
-    return render(request, 'culture_content/modules.html', {'modules': modules, 'img_url': p, 'title': title})
+    return render(request, 'culture_content/modules.html', {'modules': modules, 'img_url': p, 'title': title, 'lang_code': lang})
 
 
 @login_required
