@@ -6,9 +6,12 @@
         <div style="position: relative; display: inline-block;">
                 <img src="{% static 'media/' %}{{img_url}}" alt="{{ title }}" class="responsive-img center-fit-image">
                 {% if lang_code != 'L' %}
-                <h1 class="title-label">
-                    {{ title }}
-                </h1>
+                <div class="title-card">
+                    <h3>Explore</h3>
+                    <h1 class="title-label">
+                        {{ title }}
+                    </h1>
+                </div>
                 {% endif %}
         </div>
         {% for obj in modules %}
